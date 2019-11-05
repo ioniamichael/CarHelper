@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "479769402986",
+    "firebase_url": "https://carhelper-a4462.firebaseio.com",
+    "project_id": "carhelper-a4462",
+    "storage_bucket": "carhelper-a4462.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479769402986:android:9203decacd492260a9b413",
+        "android_client_info": {
+          "package_name": "com.enjoyapp.carhelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479769402986-6g9gp5b6litvg4shvbm3gskndio40im6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.enjoyapp.carhelper",
+            "certificate_hash": "e9c917dcdd949f49dbf5e999c171c786e1570a1c"
+          }
+        },
+        {
+          "client_id": "479769402986-69qohvdfgs7ie1qclfo71c179kergiuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO9uMivxQnxMpkvUjDwY6GG5XN49RvfPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479769402986-69qohvdfgs7ie1qclfo71c179kergiuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
