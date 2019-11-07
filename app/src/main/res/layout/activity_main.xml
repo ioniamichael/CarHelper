@@ -1,16 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".Screens.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/greetingsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/TVgreetings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="28dp"
+            tools:text="בוקר טוב" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tabsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/greetingsLayout"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:translationZ="2dp"
+            card_view:cardCornerRadius="25dp"
+            card_view:cardElevation="3dp">
+
+            <Button
+                android:id="@+id/BTNlights"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/tabs_style"
+                android:text="נורות הזהרה"
+                android:textColor="@color/mainBackgroundColor" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:translationZ="2dp"
+            card_view:cardCornerRadius="25dp"
+            card_view:cardElevation="3dp">
+
+            <Button
+                android:id="@+id/BTNgarage"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/tabs_style"
+                android:text="מצא מוסך"
+                android:textColor="@color/mainBackgroundColor" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/main_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabsLayout">
 
+        <ImageView
+            android:id="@+id/IVdivider"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:elevation="1dp"
+            card_view:srcCompat="@drawable/divider" />
     </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -1,6 +1,6 @@
 package com.enjoyapp.carhelper.Models;
 
-public class Light {
+public class Light implements Comparable<Light> {
 
     private int lampType;
     private String lampTitle;
@@ -16,6 +16,7 @@ public class Light {
         this.lampDesc = lampDesc;
         this.lampImageUrl = lampImageUrl;
     }
+
 
     public int getLampType() {
         return lampType;
@@ -47,5 +48,10 @@ public class Light {
 
     public void setLampImageUrl(String lampImageUrl) {
         this.lampImageUrl = lampImageUrl;
+    }
+
+    @Override
+    public int compareTo(Light o) {
+        return Integer.compare(lampType,o.lampType);
     }
 }

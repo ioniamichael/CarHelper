@@ -40,7 +40,6 @@ public class LightsView {
                     Log.i("LightsDataLoaded", "true " + light.getLampTitle());
                 }
                 lightsPresenter.setAdapter();
-                lightsPresenter.openLightsInfoFragment();
             }
 
             @Override

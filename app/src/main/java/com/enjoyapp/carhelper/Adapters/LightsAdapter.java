@@ -10,14 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.enjoyapp.carhelper.Fragments.LightsFragment;
-import com.enjoyapp.carhelper.Fragments.LightsInfoFragment;
 import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -34,6 +32,11 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         this.lights = lights;
     }
 
+    public void updateData(ArrayList<Light> lights) {
+        this.lights = lights;
+        notifyDataSetChanged();
+    }
+
     public interface OnLightImageClickListener {
         void onLightImageClick(int position);
     }
@@ -44,32 +47,21 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
 
     @NonNull
     @Override
-    public LightsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LightsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, final int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lights_item, parent, false);
         return new LightsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LightsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final LightsViewHolder holder, int position) {
         light = lights.get(position);
         holder.rootItemView.setTag(position);
-        holder.TVlightTitle.setText(light.getLampTitle());
-        holder.TVLightDesc.setText(light.getLampDesc());
-        holder.TVLightType.setText(String.valueOf(light.getLampType()));
         Glide.with(context)
                 .load(light.getLampImageUrl())
                 .placeholder(R.drawable.ic_launcher_background)
                 .override(200, 200)
                 .into(holder.IVLightImage);
-//        setBackGround(holder);
-        hideLightInfo(holder);
-
-        if (position == selected) {
-            showLightInfo(holder);
-        } else {
-            hideLightInfo(holder);
-        }
-
+        setLightColor(holder, position);
         holder.rootItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +70,7 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
                 if (onLightImageClickListener != null) {
                     onLightImageClickListener.onLightImageClick(position);
                 }
+                openLightInfo(position);
                 notifyDataSetChanged();
             }
         });
@@ -90,49 +83,44 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
 
     public class LightsViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView TVlightTitle;
-        private TextView TVLightDesc;
-        private TextView TVLightType;
         private ImageView IVLightImage;
         private CardView rootItemView;
 
+
         public LightsViewHolder(@NonNull View itemView) {
             super(itemView);
-            TVlightTitle = itemView.findViewById(R.id.lightTitle);
-            TVLightDesc = itemView.findViewById(R.id.lightDesc);
-            TVLightType = itemView.findViewById(R.id.lightType);
             IVLightImage = itemView.findViewById(R.id.lightImage);
             rootItemView = itemView.findViewById(R.id.rootItemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (onLightImageClickListener != null) {
-                        onLightImageClickListener.onLightImageClick(getAdapterPosition());
-                    }
-                }
-            });
         }
     }
 
-    public void hideLightInfo(LightsViewHolder holder) {
-        holder.TVlightTitle.setVisibility(View.GONE);
-        holder.TVLightDesc.setVisibility(View.GONE);
-        holder.TVLightType.setVisibility(View.GONE);
-        holder.IVLightImage.setVisibility(View.VISIBLE);
+    public void openLightInfo(int position) {
+        View modelBottomSheet = LayoutInflater.from(context).inflate(R.layout.lights_info_bottom_sheet, null);
+        BottomSheetDialog dialog = new BottomSheetDialog(context);
+        dialog.setContentView(modelBottomSheet);
+        TextView TVlightTitle = dialog.findViewById(R.id.lightTitle);
+        TextView TVLightDesc = dialog.findViewById(R.id.lightDesc);
+        TextView TVLightType = dialog.findViewById(R.id.lightType);
+        TVlightTitle.setText(lights.get(position).getLampTitle());
+        TVLightDesc.setText(lights.get(position).getLampDesc());
+        TVLightType.setText(String.valueOf(lights.get(position).getLampType()));
+        dialog.show();
     }
 
-    public void showLightInfo(LightsViewHolder holder) {
-        holder.TVlightTitle.setVisibility(View.VISIBLE);
-        holder.TVLightDesc.setVisibility(View.VISIBLE);
-        holder.TVLightType.setVisibility(View.VISIBLE);
-        holder.IVLightImage.setVisibility(View.GONE);
-    }
-
-    public void setBackGround(LightsViewHolder holder) {
-        if (light.getLampType() == 1) {
-            holder.rootItemView.setBackgroundColor(Color.GREEN);
-        } else {
-            holder.rootItemView.setBackgroundColor(Color.RED);
+    public void setLightColor(LightsViewHolder holder, int position) {
+        switch (lights.get(position).getLampType()) {
+            case 1:
+                holder.IVLightImage.setColorFilter(Color.RED);
+                break;
+            case 2:
+                holder.IVLightImage.setColorFilter(Color.YELLOW);
+                break;
+            case 3:
+                holder.IVLightImage.setColorFilter(Color.GREEN);
+                break;
+            case 4:
+                holder.IVLightImage.setColorFilter(Color.BLUE);
+                break;
         }
     }
 }
