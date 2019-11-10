@@ -5,28 +5,24 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.enjoyapp.carhelper.Adapters.LightsAdapter;
+import com.enjoyapp.carhelper.Fragments.GarageFragment;
 import com.enjoyapp.carhelper.Fragments.LightsFragment;
+import com.enjoyapp.carhelper.Fragments.SortFragment;
 import com.enjoyapp.carhelper.Models.Greetings;
-import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.R;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Greetings mGreetings = new Greetings();
     private TextView mTVgreetings;
-    private Button BTNmLights, BTNmGarage;
+    private Button BTNmLights, BTNmGarage, mBTNsort;
     private LightsFragment lightsFragment = new LightsFragment();
+    private GarageFragment garageFragment = new GarageFragment();
+    private Fragment currentFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +32,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initFunctions();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.BTNlights:
+                if (!(currentFragment instanceof LightsFragment)) {
+                    showLightsFragment();
+                }
+                break;
+            case R.id.BTNgarage:
+                if (!(currentFragment instanceof GarageFragment)) {
+                    showGarageFragment();
+                }
+                showGarageFragment();
+                break;
+            case R.id.BTNsort:
+                openSortFragment();
+                break;
+        }
+    }
+
     public void initFunctions() {
         showLightsFragment();
         showGreetings();
     }
 
     public void showLightsFragment() {
-        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, this.lightsFragment)
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.lightsFragment)
+                .commit();
+    }
+
+    public void showGarageFragment() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container, this.garageFragment)
                 .commit();
     }
 
@@ -51,23 +72,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void initView() {
+        currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
         mTVgreetings = findViewById(R.id.TVgreetings);
         BTNmLights = findViewById(R.id.BTNlights);
         BTNmGarage = findViewById(R.id.BTNgarage);
+        mBTNsort = findViewById(R.id.BTNsort);
         BTNmLights.setOnClickListener(this);
         BTNmGarage.setOnClickListener(this);
+        mBTNsort.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.BTNlights:
-                //TODO open lights fragment...
-                lightsFragment.sortAdapter();
-                break;
-            case R.id.BTNgarage:
-                //TODO open garage fragment...
-                break;
-        }
+    public void openSortFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_left_to_right)
+                .replace(R.id.sort_fragment_container, new SortFragment())
+                .commit();
     }
+
 }

@@ -52,6 +52,7 @@ public class Light implements Comparable<Light> {
 
     @Override
     public int compareTo(Light o) {
-        return Integer.compare(lampType,o.lampType);
+        return Integer.compare(lampType, o.lampType);
     }
+
 }
