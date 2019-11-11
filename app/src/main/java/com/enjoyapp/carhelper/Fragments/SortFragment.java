@@ -1,6 +1,7 @@
 package com.enjoyapp.carhelper.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,14 @@ import androidx.fragment.app.Fragment;
 
 import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.R;
+import com.enjoyapp.carhelper.Screens.MainActivity;
 
 public class SortFragment extends Fragment implements View.OnClickListener {
 
     private Button mFirst, mSecond, mThird;
     private Fragment currentFragment;
+    private Fragment sortFragment;
+
 
     @Nullable
     @Override
@@ -28,8 +32,10 @@ public class SortFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    //Initialize views.
     public void initViews(View view) {
         currentFragment = getFragmentManager().findFragmentById(R.id.main_fragment_container);
+        sortFragment = getFragmentManager().findFragmentById(R.id.sort_fragment_container);
         mFirst = view.findViewById(R.id.firstButtonSort);
         mSecond = view.findViewById(R.id.secondButtonSort);
         mThird = view.findViewById(R.id.thirdButtonSort);
@@ -38,6 +44,7 @@ public class SortFragment extends Fragment implements View.OnClickListener {
         mThird.setOnClickListener(this);
     }
 
+    //Setting text according to main fragment - Lights fragment / Garage fragment.
     public void setTextAndVisibility() {
         if (currentFragment instanceof LightsFragment) {
             mFirst.setVisibility(View.VISIBLE);
@@ -58,10 +65,17 @@ public class SortFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.firstButtonSort:
-                if (currentFragment instanceof LightsFragment) {
-                    ((LightsFragment) currentFragment).sortAdapter();
+                try {
+                    if (currentFragment instanceof LightsFragment) {
+                        ((LightsFragment) currentFragment).sortAdapter();
+                    }
+                } catch (Exception e) {
+                    e.getMessage();
                 }
                 break;
         }
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.removeSortFragment();
     }
+
 }

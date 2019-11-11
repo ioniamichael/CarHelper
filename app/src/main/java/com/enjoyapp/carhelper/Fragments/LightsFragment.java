@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.enjoyapp.carhelper.Adapters.LightsAdapter;
 import com.enjoyapp.carhelper.Models.Light;
+import com.enjoyapp.carhelper.Screens.MainActivity;
 import com.enjoyapp.carhelper.Views.LightsView;
 import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.Presenters.LightsPresenter;
@@ -26,6 +27,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     private Light light;
     private LightsAdapter lightsAdapter;
     private LightsView presenter;
+    private View view;
 
     public LightsFragment() {
     }
@@ -33,10 +35,12 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lights, container, false);
-        initView(view);
-        presenter = new LightsView(lights, light, this);
-        presenter.loadData();
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_lights, container, false);
+            initView(view);
+            presenter = new LightsView(lights, light, this);
+            presenter.loadData();
+        }
         return view;
     }
 
@@ -46,6 +50,14 @@ public class LightsFragment extends Fragment implements LightsPresenter {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         RVLights.setLayoutManager(layoutManager);
         RVLights.setAdapter(lightsAdapter);
+        lightsAdapter.setOnLightImageClickListener(new LightsAdapter.OnLightImageClickListener() {
+            @Override
+            public void onLightImageClick(int position) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.removeSortFragment();
+            }
+        });
+
     }
 
     public void sortAdapter() {
@@ -56,4 +68,5 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     public void initView(View view) {
         RVLights = view.findViewById(R.id.RVLights);
     }
+
 }

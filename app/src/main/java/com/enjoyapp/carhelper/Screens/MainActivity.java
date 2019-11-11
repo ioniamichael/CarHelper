@@ -2,10 +2,17 @@ package com.enjoyapp.carhelper.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.enjoyapp.carhelper.Fragments.GarageFragment;
@@ -22,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LightsFragment lightsFragment = new LightsFragment();
     private GarageFragment garageFragment = new GarageFragment();
     private Fragment currentFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openSortFragment();
                 break;
         }
+        removeSortFragment();
     }
 
     public void initFunctions() {
@@ -88,5 +95,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .replace(R.id.sort_fragment_container, new SortFragment())
                 .commit();
     }
+
+    public void removeSortFragment() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.sort_fragment_container);
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_left_to_right)
+                    .remove(fragment)
+                    .commit();
+        }
+    }
+
 
 }
