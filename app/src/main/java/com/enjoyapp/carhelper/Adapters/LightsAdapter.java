@@ -1,8 +1,12 @@
 package com.enjoyapp.carhelper.Adapters;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,9 +28,10 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
 
     private Context context;
     private ArrayList<Light> lights;
-    private OnLightImageClickListener onLightImageClickListener;
+    private OnLightImageTouchListener onLightImageTouchListener;
     private int selected = -1;
     private Light light;
+
 
     public LightsAdapter(Context context, ArrayList<Light> lights) {
         this.context = context;
@@ -38,12 +43,13 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         notifyDataSetChanged();
     }
 
-    public interface OnLightImageClickListener {
-        void onLightImageClick(int position);
+
+    public interface OnLightImageTouchListener {
+        void onLightImageTouch(int position, MotionEvent motionEvent, LightsViewHolder holder);
     }
 
-    public void setOnLightImageClickListener(OnLightImageClickListener onLightImageClickListener) {
-        this.onLightImageClickListener = onLightImageClickListener;
+    public void setOnLightImageTouchListener(OnLightImageTouchListener onLightImageTouchListener) {
+        this.onLightImageTouchListener = onLightImageTouchListener;
     }
 
     @NonNull
@@ -53,26 +59,33 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         return new LightsViewHolder(view);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(@NonNull final LightsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final LightsViewHolder holder, final int position) {
         light = lights.get(position);
         holder.rootItemView.setTag(position);
-        Glide.with(context)
-                .load(light.getLampImageUrl())
-                .placeholder(R.drawable.ic_launcher_background)
-                .override(200, 200)
-                .into(holder.IVLightImage);
+
+        //Glide - image loader.
+        if (context != null) {
+            Glide.with(context)
+                    .load(light.getLampImageUrl())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .override(200, 200)
+                    .into(holder.IVLightImage);
+        }
+
         setLightColor(holder, position);
-        holder.rootItemView.setOnClickListener(new View.OnClickListener() {
+
+        //This method called from LightsFragment.
+        holder.rootItemView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 int position = (int) view.getTag();
                 selected = position;
-                if (onLightImageClickListener != null) {
-                    onLightImageClickListener.onLightImageClick(position);
+                if (onLightImageTouchListener != null) {
+                    onLightImageTouchListener.onLightImageTouch(position, motionEvent, holder);
                 }
-                openLightInfo(position);
-                notifyDataSetChanged();
+                return true;
             }
         });
     }
@@ -95,6 +108,7 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         }
     }
 
+    //Open light information on bottom sheet dialog.
     public void openLightInfo(int position) {
         View modelBottomSheet = LayoutInflater.from(context).inflate(R.layout.lights_info_bottom_sheet, null);
         BottomSheetDialog dialog = new BottomSheetDialog(context);
@@ -108,6 +122,7 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         dialog.show();
     }
 
+    //Set light color according to warning priority (1-4)
     public void setLightColor(LightsViewHolder holder, int position) {
         switch (lights.get(position).getLampType()) {
             case 1:

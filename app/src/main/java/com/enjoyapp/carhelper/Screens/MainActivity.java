@@ -1,15 +1,23 @@
 package com.enjoyapp.carhelper.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -21,7 +29,7 @@ import com.enjoyapp.carhelper.Fragments.SortFragment;
 import com.enjoyapp.carhelper.Models.Greetings;
 import com.enjoyapp.carhelper.R;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private Greetings mGreetings = new Greetings();
     private TextView mTVgreetings;
@@ -29,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LightsFragment lightsFragment = new LightsFragment();
     private GarageFragment garageFragment = new GarageFragment();
     private Fragment currentFragment;
+    private Animation animation;
+    private CardView mGarageBTNRootView, mLightsBTNRootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,27 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
         initFunctions();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.BTNlights:
-                if (!(currentFragment instanceof LightsFragment)) {
-                    showLightsFragment();
-                }
-                break;
-            case R.id.BTNgarage:
-                if (!(currentFragment instanceof GarageFragment)) {
-                    showGarageFragment();
-                }
-                showGarageFragment();
-                break;
-            case R.id.BTNsort:
-                openSortFragment();
-                break;
-        }
-        removeSortFragment();
     }
 
     public void initFunctions() {
@@ -84,9 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BTNmLights = findViewById(R.id.BTNlights);
         BTNmGarage = findViewById(R.id.BTNgarage);
         mBTNsort = findViewById(R.id.BTNsort);
-        BTNmLights.setOnClickListener(this);
-        BTNmGarage.setOnClickListener(this);
-        mBTNsort.setOnClickListener(this);
+        mLightsBTNRootView = findViewById(R.id.lightsBTNRootView);
+        mGarageBTNRootView = findViewById(R.id.garageBTNRootView);
+        BTNmLights.setOnTouchListener(this);
+        BTNmGarage.setOnTouchListener(this);
+        mBTNsort.setOnTouchListener(this);
+
     }
 
     public void openSortFragment() {
@@ -107,5 +99,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (view.getId()) {
+            case R.id.BTNlights:
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        animation = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+                        mLightsBTNRootView.startAnimation(animation);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (!(currentFragment instanceof LightsFragment)) {
+                            showLightsFragment();
+                        }
+                        break;
+                }
+                break;
+            case R.id.BTNgarage:
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        animation = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+                        mGarageBTNRootView.startAnimation(animation);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if (!(currentFragment instanceof GarageFragment)) {
+                            showGarageFragment();
+                        }
+                        break;
+                }
+                break;
+            case R.id.BTNsort:
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        animation = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+                        mBTNsort.startAnimation(animation);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        openSortFragment();
+                        break;
+                }
+                break;
+        }
+        removeSortFragment();
+        return true;
+    }
 }

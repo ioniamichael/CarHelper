@@ -7,31 +7,31 @@
     android:orientation="horizontal"
     android:paddingStart="110dp">
 
-    <Button
-        android:background="@null"
-        android:id="@+id/firstButtonSort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#FFffff"
-        tools:text="1" />
+        <Button
+            android:id="@+id/firstButtonSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textColor="@color/white"
+            tools:text="1" />
 
-    <Button
-        android:background="@null"
-        android:id="@+id/secondButtonSort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#FFffff"
-        tools:text="2" />
+        <Button
+            android:id="@+id/secondButtonSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textColor="@color/white"
+            tools:text="2" />
 
-    <Button
-        android:background="@null"
-        android:id="@+id/thirdButtonSort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="#FFffff"
-        tools:text="3" />
+        <Button
+            android:id="@+id/thirdButtonSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textColor="@color/white"
+            tools:text="3" />
 
 </LinearLayout>
