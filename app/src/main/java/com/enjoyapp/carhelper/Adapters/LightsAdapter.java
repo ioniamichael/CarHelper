@@ -1,16 +1,13 @@
 package com.enjoyapp.carhelper.Adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.R;
-import com.enjoyapp.carhelper.Screens.MainActivity;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.enjoyapp.carhelper.Utils.FragmentCommunication;
 
 import java.util.ArrayList;
 
@@ -29,13 +25,15 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
     private Context context;
     private ArrayList<Light> lights;
     private OnLightImageTouchListener onLightImageTouchListener;
+    private FragmentCommunication mCommunicator;
     private int selected = -1;
     private Light light;
 
 
-    public LightsAdapter(Context context, ArrayList<Light> lights) {
+    public LightsAdapter(Context context, ArrayList<Light> lights, FragmentCommunication mCommunicator) {
         this.context = context;
         this.lights = lights;
+        this.mCommunicator = mCommunicator;
     }
 
     public void updateData(ArrayList<Light> lights) {
@@ -56,7 +54,7 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
     @Override
     public LightsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, final int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lights_item, parent, false);
-        return new LightsViewHolder(view);
+        return new LightsViewHolder(view, mCommunicator);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -85,6 +83,9 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
                 if (onLightImageTouchListener != null) {
                     onLightImageTouchListener.onLightImageTouch(position, motionEvent, holder);
                 }
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    mCommunicator.respond(position, lights.get(position).getLampTitle(), lights.get(position).getLampDesc());
+                }
                 return true;
             }
         });
@@ -99,27 +100,16 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
 
         private ImageView IVLightImage;
         private CardView rootItemView;
+        private FragmentCommunication mComminication;
 
 
-        public LightsViewHolder(@NonNull View itemView) {
+        public LightsViewHolder(@NonNull View itemView, FragmentCommunication Communicator) {
             super(itemView);
             IVLightImage = itemView.findViewById(R.id.lightImage);
             rootItemView = itemView.findViewById(R.id.rootItemView);
-        }
-    }
+            mComminication = Communicator;
 
-    //Open light information on bottom sheet dialog.
-    public void openLightInfo(int position) {
-        View modelBottomSheet = LayoutInflater.from(context).inflate(R.layout.lights_info_bottom_sheet, null);
-        BottomSheetDialog dialog = new BottomSheetDialog(context);
-        dialog.setContentView(modelBottomSheet);
-        TextView TVlightTitle = dialog.findViewById(R.id.lightTitle);
-        TextView TVLightDesc = dialog.findViewById(R.id.lightDesc);
-        TextView TVLightType = dialog.findViewById(R.id.lightType);
-        TVlightTitle.setText(lights.get(position).getLampTitle());
-        TVLightDesc.setText(lights.get(position).getLampDesc());
-        TVLightType.setText(String.valueOf(lights.get(position).getLampType()));
-        dialog.show();
+        }
     }
 
     //Set light color according to warning priority (1-4)

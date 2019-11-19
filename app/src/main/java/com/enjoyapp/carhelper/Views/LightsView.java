@@ -37,7 +37,6 @@ public class LightsView {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     light = dataSnapshot1.getValue(Light.class);
                     lights.add(light);
-                    Log.i("LightsDataLoaded", "true " + light.getLampTitle());
                 }
                 lightsPresenter.setAdapter();
             }

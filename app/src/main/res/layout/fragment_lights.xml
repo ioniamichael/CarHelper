@@ -9,7 +9,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVLights"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false"/>
 
     <FrameLayout
         android:layout_gravity="bottom"
