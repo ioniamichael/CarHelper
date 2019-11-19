@@ -9,25 +9,31 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enjoyapp.carhelper.Adapters.GaragesAdapter;
 import com.enjoyapp.carhelper.Models.Garage;
 import com.enjoyapp.carhelper.R;
+import com.enjoyapp.carhelper.Singletons.AddressSingleton;
+import com.google.android.gms.common.util.Strings;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GarageListFragment extends Fragment {
 
     private RecyclerView RVGarage;
     private ArrayList<Garage> garages;
     private Garage garage;
+    private ArrayList<Garage.GarageObject> garageObjects = new ArrayList<>();
     private GaragesAdapter adapter;
 
     @Nullable
@@ -36,7 +42,7 @@ public class GarageListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_garage_list, container, false);
         readData();
         RVGarage = view.findViewById(R.id.RVGarage);
-        adapter = new GaragesAdapter(getActivity(), garage);
+        adapter = new GaragesAdapter(getActivity(), garageObjects);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         RVGarage.setLayoutManager(layoutManager);
         RVGarage.setAdapter(adapter);
@@ -57,8 +63,14 @@ public class GarageListFragment extends Fragment {
             Gson gson = new Gson();
             garage = gson.fromJson(json_string, Garage.class);
 
-            Log.d("DataIs", "readData: " + garage.getGarage().get(0).garageName);
+            for (int i = 0; i < 13476; i++) {
+                if (garage.getGarage().get(i).garageCity.equals(AddressSingleton.getInstance().getCurrentAddress())) {
+                    garageObjects.add(garage.getGarage().get(i));
+                    Log.d("TheDataIS", "readData: " + garage.getGarage().get(i).garageCity);
+                }
+            }
 
+            Log.d("TheDataIS", "readDataresult: " + garageObjects.get(1).garageCity);
         } catch (IOException e) {
             e.printStackTrace();
         }

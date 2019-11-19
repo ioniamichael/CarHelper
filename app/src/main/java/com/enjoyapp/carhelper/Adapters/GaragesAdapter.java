@@ -13,17 +13,19 @@ import com.enjoyapp.carhelper.Models.Garage;
 import com.enjoyapp.carhelper.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageViewHolder> {
 
     private Context context;
-    private ArrayList<Garage.GarageObject> garages;
+//    private ArrayList<Garage.GarageObject> garages;
+    private List<Garage.GarageObject> garageObjects;
     private Garage garage;
 
-    public GaragesAdapter(Context context, Garage garage) {
+    public GaragesAdapter(Context context, List<Garage.GarageObject> garageObjects) {
         this.context = context;
-        this.garages = garage.getGarage();
-        this.garage = garage;
+//        this.garages = garage.getGarage();
+        this.garageObjects = garageObjects;
     }
 
     @NonNull
@@ -35,18 +37,18 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
 
     @Override
     public void onBindViewHolder(@NonNull GarageViewHolder holder, int position) {
-        holder.mGarageName.setText(garages.get(position).garageName);
-        holder.mGarageAddress.setText(garages.get(position).garageAddress+" , "+garages.get(position).garageCity);
-        holder.mGaragePhoneNumber.setText(garages.get(position).garagePhone);
-        holder.mGarageType.setText(garages.get(position).garageType);
+        holder.mGarageName.setText(garageObjects.get(position).garageName);
+        holder.mGarageAddress.setText(garageObjects.get(position).garageAddress+" , "+garageObjects.get(position).garageCity);
+        holder.mGaragePhoneNumber.setText(garageObjects.get(position).garagePhone);
+        holder.mGarageType.setText(garageObjects.get(position).garageType);
     }
 
     @Override
     public int getItemCount() {
-        if (garages == null) {
+        if (garageObjects == null) {
             return 0;
         }
-        return garages.size();
+        return garageObjects.size();
     }
 
     public class GarageViewHolder extends RecyclerView.ViewHolder {

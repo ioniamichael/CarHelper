@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.enjoyapp.carhelper.R;
+import com.enjoyapp.carhelper.Singletons.AddressSingleton;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,9 +29,9 @@ public class AddressFinder extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private List<Address> addresses;
     private Context context;
-    FragmentActivity activity ;
+    FragmentActivity activity;
 
-    public AddressFinder(Context context,FragmentActivity activity) {
+    public AddressFinder(Context context, FragmentActivity activity) {
         this.context = context;
         this.activity = activity;
     }
@@ -54,7 +55,8 @@ public class AddressFinder extends AppCompatActivity {
             e.printStackTrace();
         }
         if (addresses.size() > 0) {
-           view.setText(addresses.get(0).getLocality());
+            view.setText(addresses.get(0).getLocality());
+            AddressSingleton.getInstance().setCurrentAddress(addresses.get(0).getLocality());
         } else {
             // do your stuff
         }
