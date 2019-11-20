@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GarageListFragment extends Fragment {
@@ -35,6 +36,7 @@ public class GarageListFragment extends Fragment {
     private Garage garage;
     private ArrayList<Garage.GarageObject> garageObjects = new ArrayList<>();
     private GaragesAdapter adapter;
+
 
     @Nullable
     @Override
@@ -46,6 +48,7 @@ public class GarageListFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         RVGarage.setLayoutManager(layoutManager);
         RVGarage.setAdapter(adapter);
+
         return view;
     }
 
@@ -63,16 +66,17 @@ public class GarageListFragment extends Fragment {
             Gson gson = new Gson();
             garage = gson.fromJson(json_string, Garage.class);
 
-            for (int i = 0; i < 13476; i++) {
+            for (int i = 0; i < 13273; i++) {
                 if (garage.getGarage().get(i).garageCity.equals(AddressSingleton.getInstance().getCurrentAddress())) {
                     garageObjects.add(garage.getGarage().get(i));
-                    Log.d("TheDataIS", "readData: " + garage.getGarage().get(i).garageCity);
                 }
             }
 
-            Log.d("TheDataIS", "readDataresult: " + garageObjects.get(1).garageCity);
+            Log.d("AfterEdit", "readData: " + garage.getGarage().size());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
