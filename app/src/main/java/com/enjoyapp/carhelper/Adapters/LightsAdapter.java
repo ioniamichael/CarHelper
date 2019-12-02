@@ -67,7 +67,6 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         if (context != null) {
             Glide.with(context)
                     .load(light.getLampImageUrl())
-                    .placeholder(R.drawable.ic_launcher_background)
                     .override(200, 200)
                     .into(holder.IVLightImage);
         }

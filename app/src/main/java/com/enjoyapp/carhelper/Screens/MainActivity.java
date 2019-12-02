@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void showGreetings() {
-        mTVgreetings.setText(mGreetings.getGreetings() + "," + UserSingleton.getInstance().getmName());
+        mTVgreetings.setText(mGreetings.getGreetings() + ", " + UserSingleton.getInstance().getmName() + "!");
     }
 
     @Override
