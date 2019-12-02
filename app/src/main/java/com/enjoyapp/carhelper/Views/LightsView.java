@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.enjoyapp.carhelper.Fragments.LoaderFragment;
+import com.enjoyapp.carhelper.Listeners.OnGetDataListener;
 import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.Presenters.LightsPresenter;
 import com.google.firebase.database.DataSnapshot;
@@ -16,36 +18,67 @@ import java.util.ArrayList;
 
 public class LightsView {
 
-    private ArrayList<Light> lights = new ArrayList<>();
-    private Light light;
-    private FirebaseDatabase db;
-    private DatabaseReference allLights;
-    private LightsPresenter lightsPresenter;
+    private ArrayList<Light> mLightsArray;
+    private Light mLight;
+    private FirebaseDatabase mDB = FirebaseDatabase.getInstance();
+    private DatabaseReference mLightsRef = mDB.getReference("AllLights");
+    private LightsPresenter mLightsPresenter;
 
-    public LightsView(ArrayList<Light> lights, Light light, LightsPresenter lightsPresenter) {
-        this.lights = lights;
-        this.light = light;
-        this.lightsPresenter = lightsPresenter;
+    public LightsView(ArrayList<Light> mLightsArray, Light mLight, LightsPresenter mLightsPresenter) {
+        this.mLightsArray = mLightsArray;
+        this.mLight = mLight;
+        this.mLightsPresenter = mLightsPresenter;
     }
 
-    public void loadData() {
-        db = FirebaseDatabase.getInstance();
-        allLights = db.getReference("AllLights");
-        allLights.addValueEventListener(new ValueEventListener() {
+    public void loadData(){
+        readData(mLightsRef, new OnGetDataListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    light = dataSnapshot1.getValue(Light.class);
-                    lights.add(light);
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                Log.d("DataLoaded", "onSuccess: ");
+                mLightsPresenter.stopLoadAnimation();
+                mLightsPresenter.setAdapter();
+            }
+
+            @Override
+            public void onStart() {
+                Log.d("DataLoaded", "onStart: ");
+                mLightsPresenter.clearRecyclerView();
+                mLightsPresenter.startLoadAnimation();
+
+            }
+
+            @Override
+            public void onFailure() {
+                Log.d("DataLoaded", "onFailure: ");
+            }
+        });
+    }
+
+
+    //OnGetDataListener Interface declaration
+    public void readData(DatabaseReference ref, final OnGetDataListener listener) {
+        listener.onStart();
+
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    mLight = dataSnapshot1.getValue(Light.class);
+                    mLightsArray.add(mLight);
+
                 }
-                lightsPresenter.setAdapter();
+                listener.onSuccess(dataSnapshot);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i("LightsDataLoaded", "false ");
+                listener.onFailure();
+
             }
         });
+
     }
+
 
 }

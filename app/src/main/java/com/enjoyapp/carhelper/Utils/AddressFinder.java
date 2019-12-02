@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +23,7 @@ import java.util.Locale;
 
 public class AddressFinder extends AppCompatActivity {
 
-    LocationFinder finder;
+    private LocationFinder finder;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private List<Address> addresses;
     private Context context;
@@ -56,7 +54,7 @@ public class AddressFinder extends AppCompatActivity {
         }
         if (addresses.size() > 0) {
             view.setText(addresses.get(0).getLocality());
-            AddressSingleton.getInstance().setCurrentAddress(addresses.get(0).getLocality());
+            AddressSingleton.getInstance().setmCurrentAddress(addresses.get(0).getLocality());
         } else {
             // do your stuff
         }

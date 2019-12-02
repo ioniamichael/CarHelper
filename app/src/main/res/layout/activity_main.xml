@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main_gradient"
     android:layoutDirection="rtl"
-    tools:context=".Screens.MainActivity">
+    tools:mContext=".Screens.MainActivity">
 
     <LinearLayout
         android:id="@+id/greetingsLayout"
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="28dp"
+            android:textSize="28sp"
             tools:text="בוקר טוב" />
     </LinearLayout>
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/tabs_style"
-                android:text="נורות הזהרה"
+                android:text="@string/lights_text"
                 android:textColor="@color/mainBackgroundColor" />
         </androidx.cardview.widget.CardView>
 
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/tabs_style"
-                android:text="מצא מוסך"
+                android:text="@string/find_garage"
                 android:textColor="@color/mainBackgroundColor" />
         </androidx.cardview.widget.CardView>
 
@@ -82,6 +82,7 @@
         android:layout_below="@id/tabsLayout">
 
         <ImageView
+            android:contentDescription="@string/shadow_divider"
             android:id="@+id/IVdivider"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -97,6 +98,7 @@
         android:gravity="bottom">
 
         <ImageView
+            android:contentDescription="@string/shadow_divider"
             android:tint="@color/mainBackgroundColor"
             android:id="@+id/IVShadow"
             android:layout_marginBottom="-170dp"
@@ -118,7 +120,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@drawable/sort_button_style"
-            android:text="מיון לפי..."
+            android:text="@string/sort_by"
             android:textColor="@color/white"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"

@@ -3,7 +3,7 @@ package com.enjoyapp.carhelper.Singletons;
 public class AddressSingleton {
 
     private static AddressSingleton instance = null;
-    private String currentAddress = null;
+    private String mCurrentAddress = null;
 
     private AddressSingleton() {
     }
@@ -15,11 +15,11 @@ public class AddressSingleton {
         return instance;
     }
 
-    public String getCurrentAddress() {
-        return currentAddress;
+    public String getmCurrentAddress() {
+        return mCurrentAddress;
     }
 
-    public void setCurrentAddress(String currentAddress) {
-        this.currentAddress = currentAddress;
+    public void setmCurrentAddress(String mCurrentAddress) {
+        this.mCurrentAddress = mCurrentAddress;
     }
 }

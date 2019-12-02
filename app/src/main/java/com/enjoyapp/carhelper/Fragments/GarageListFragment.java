@@ -16,26 +16,20 @@ import com.enjoyapp.carhelper.Adapters.GaragesAdapter;
 import com.enjoyapp.carhelper.Models.Garage;
 import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.Singletons.AddressSingleton;
-import com.google.android.gms.common.util.Strings;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class GarageListFragment extends Fragment {
 
-    private RecyclerView RVGarage;
-    private ArrayList<Garage> garages;
-    private Garage garage;
-    private ArrayList<Garage.GarageObject> garageObjects = new ArrayList<>();
-    private GaragesAdapter adapter;
+    private RecyclerView mRVGarage;
+    private Garage mGarage;
+    private ArrayList<Garage.GarageObject> mGarageObjects = new ArrayList<>();
+    private GaragesAdapter mAdapter;
 
 
     @Nullable
@@ -43,11 +37,11 @@ public class GarageListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_garage_list, container, false);
         readData();
-        RVGarage = view.findViewById(R.id.RVGarage);
-        adapter = new GaragesAdapter(getActivity(), garageObjects);
+        mRVGarage = view.findViewById(R.id.RVGarage);
+        mAdapter = new GaragesAdapter(getActivity(), mGarageObjects);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        RVGarage.setLayoutManager(layoutManager);
-        RVGarage.setAdapter(adapter);
+        mRVGarage.setLayoutManager(layoutManager);
+        mRVGarage.setAdapter(mAdapter);
 
         return view;
     }
@@ -56,7 +50,7 @@ public class GarageListFragment extends Fragment {
         String json_string = null;
 
         try {
-            InputStream inputStream = getActivity().getAssets().open("garages.json");
+            InputStream inputStream = Objects.requireNonNull(getActivity()).getAssets().open(getString(R.string.garage_json));
             int size = inputStream.available();
             byte[] buffer = new byte[size];
             inputStream.read(buffer);
@@ -64,19 +58,22 @@ public class GarageListFragment extends Fragment {
 
             json_string = new String(buffer, StandardCharsets.UTF_8);
             Gson gson = new Gson();
-            garage = gson.fromJson(json_string, Garage.class);
+            mGarage = gson.fromJson(json_string, Garage.class);
+
 
             for (int i = 0; i < 13273; i++) {
-                if (garage.getGarage().get(i).garageCity.equals(AddressSingleton.getInstance().getCurrentAddress())) {
-                    garageObjects.add(garage.getGarage().get(i));
+                if (mGarage.getGarage().get(i).garageCity.equals(AddressSingleton.getInstance().getmCurrentAddress())) {
+                    if (!mGarageObjects.contains(mGarage.getGarage().get(i))) {
+                        mGarageObjects.add(mGarage.getGarage().get(i));
+//                        Log.d("AfterEdit", "readData: " + mGarageObjects.get(i).garageName);
+                    }
                 }
             }
 
-            Log.d("AfterEdit", "readData: " + garage.getGarage().size());
+            Log.d("AfterEdit", "readData: " + mGarageObjects.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
 }

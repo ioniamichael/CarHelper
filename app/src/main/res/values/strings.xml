@@ -7,6 +7,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="location_not_found">לא הצלחינו לאתר את המיקום!\nיתכן אינך מחובר לרשת.</string>
     <string name="title_activity_maps">Map</string>
+    <string name="garage_json">garages.json</string>
+    <string name="your_location">אתה נמצא ב -</string>
+    <string name="location_finding">מחפשים את המיקום</string>
+    <string name="garage_near">המוסכים לידך</string>
+    <string name="lights_text">נורות הזהרה</string>
+    <string name="find_garage">מצא מוסך</string>
+    <string name="shadow_divider">shadowDivider</string>
+    <string name="sort_by">מיון לפי...</string>
+    <string name="comma">,</string>
 
 
 </resources>

@@ -16,18 +16,21 @@ import com.enjoyapp.carhelper.Utils.CustomToast;
 
 public class GarageFragment extends Fragment {
 
-    private TextView mTVAddress;
-    private AddressFinder addressFinder;
-    private CustomToast customToast;
+    private TextView mTVAddress, mGaragesListCount;
+    private AddressFinder mAddressFinder;
+    private CustomToast mCustomToast;
+    private GarageListFragment mGarageListFragment;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_garage, container, false);
+        mGarageListFragment = new GarageListFragment();
         mTVAddress = view.findViewById(R.id.TVAddress);
-        addressFinder = new AddressFinder(getContext(), getActivity());
-        customToast = new CustomToast(getContext());
+        mGaragesListCount = view.findViewById(R.id.garagesListCount);
+        mAddressFinder = new AddressFinder(getContext(), getActivity());
+        mCustomToast = new CustomToast(getContext());
         return view;
     }
 
@@ -37,16 +40,23 @@ public class GarageFragment extends Fragment {
         getAddress();
         showMap();
         showGaragesListFragment();
+        getActivity().findViewById(R.id.BTNsort).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().findViewById(R.id.BTNsort).setVisibility(View.VISIBLE);
 
     }
 
     public void getAddress() {
-        if (addressFinder.checkLocationPermission()) {
+        if (mAddressFinder.checkLocationPermission()) {
             try {
-                addressFinder.getLocation(mTVAddress);
+                mAddressFinder.getLocation(mTVAddress);
             } catch (Exception e) {
                 e.getMessage();
-                customToast.showToast(R.string.location_not_found);
+                mCustomToast.showToast(R.string.location_not_found);
             }
         }
     }
@@ -57,8 +67,7 @@ public class GarageFragment extends Fragment {
     }
 
     public void showGaragesListFragment() {
-        getFragmentManager().beginTransaction().replace(R.id.garageListContainer, new GarageListFragment())
+        getFragmentManager().beginTransaction().replace(R.id.garageListContainer, mGarageListFragment)
                 .commit();
     }
-
 }

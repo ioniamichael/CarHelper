@@ -1,5 +1,6 @@
 package com.enjoyapp.carhelper.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.enjoyapp.carhelper.Models.Garage;
 import com.enjoyapp.carhelper.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageViewHolder> {
 
     private Context context;
-//    private ArrayList<Garage.GarageObject> garages;
+    //    private ArrayList<Garage.GarageObject> garages;
     private List<Garage.GarageObject> garageObjects;
     private Garage garage;
 
@@ -35,10 +35,11 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
         return new GarageViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull GarageViewHolder holder, int position) {
         holder.mGarageName.setText(garageObjects.get(position).garageName);
-        holder.mGarageAddress.setText(garageObjects.get(position).garageAddress+" , "+garageObjects.get(position).garageCity);
+        holder.mGarageAddress.setText(garageObjects.get(position).garageAddress + context.getString(R.string.comma) + garageObjects.get(position).garageCity);
         holder.mGaragePhoneNumber.setText(garageObjects.get(position).garagePhone);
         holder.mGarageType.setText(garageObjects.get(position).garageType);
     }

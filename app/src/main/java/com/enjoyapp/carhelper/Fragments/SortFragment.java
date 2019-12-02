@@ -16,8 +16,8 @@ import com.enjoyapp.carhelper.Screens.MainActivity;
 public class SortFragment extends Fragment implements View.OnClickListener {
 
     private Button mFirst, mSecond, mThird;
-    private Fragment currentFragment;
-    private Fragment sortFragment;
+    private Fragment mCurrentFragment;
+    private Fragment mSortFragment;
 
 
     @Nullable
@@ -30,9 +30,9 @@ public class SortFragment extends Fragment implements View.OnClickListener {
     }
 
     //Initialize views.
-    public void initViews(View view) {
-        currentFragment = getFragmentManager().findFragmentById(R.id.main_fragment_container);
-        sortFragment = getFragmentManager().findFragmentById(R.id.sort_fragment_container);
+    private void initViews(View view) {
+        mCurrentFragment = getFragmentManager().findFragmentById(R.id.main_fragment_container);
+        mSortFragment = getFragmentManager().findFragmentById(R.id.sort_fragment_container);
         mFirst = view.findViewById(R.id.firstButtonSort);
         mSecond = view.findViewById(R.id.secondButtonSort);
         mThird = view.findViewById(R.id.thirdButtonSort);
@@ -42,19 +42,19 @@ public class SortFragment extends Fragment implements View.OnClickListener {
     }
 
     //Setting text according to main fragment - Lights fragment / Garage fragment.
-    public void setTextAndVisibility() {
-        if (currentFragment instanceof LightsFragment) {
+    private void setTextAndVisibility() {
+        if (mCurrentFragment instanceof LightsFragment) {
             mFirst.setVisibility(View.VISIBLE);
             mSecond.setVisibility(View.VISIBLE);
             mFirst.setText("צבע הנורה");
-            mSecond.setText("סוג תקלה");
-        } else if (currentFragment instanceof GarageFragment) {
-            mFirst.setVisibility(View.VISIBLE);
-            mSecond.setVisibility(View.VISIBLE);
-            mThird.setVisibility(View.VISIBLE);
-            mFirst.setText("כתובת");
-            mSecond.setText("בלה בלה");
-            mThird.setText("סוג מוסך");
+//            mSecond.setText("סוג תקלה");
+        } else if (mCurrentFragment instanceof GarageFragment) {
+//            mFirst.setVisibility(View.VISIBLE);
+//            mSecond.setVisibility(View.VISIBLE);
+//            mThird.setVisibility(View.VISIBLE);
+//            mFirst.setText("כתובת");
+//            mSecond.setText("בלה בלה");
+//            mThird.setText("סוג מוסך");
         }
     }
 
@@ -63,8 +63,8 @@ public class SortFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.firstButtonSort:
                 try {
-                    if (currentFragment instanceof LightsFragment) {
-                        ((LightsFragment) currentFragment).sortAdapter();
+                    if (mCurrentFragment instanceof LightsFragment) {
+                        ((LightsFragment) mCurrentFragment).sortAdapter();
                     }
                 } catch (Exception e) {
                     e.getMessage();

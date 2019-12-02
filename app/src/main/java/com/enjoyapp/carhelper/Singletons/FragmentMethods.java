@@ -1,7 +1,6 @@
 package com.enjoyapp.carhelper.Singletons;
 
 public class FragmentMethods {
-
     private boolean isInfoFragmentOpened = false;
 
     public boolean isInfoFragmentOpened() {
@@ -23,5 +22,4 @@ public class FragmentMethods {
         }
         return instance;
     }
-
 }

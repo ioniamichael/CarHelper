@@ -53,4 +53,6 @@ public class Light implements Comparable<Light> {
     public int compareTo(Light o) {
         return Integer.compare(lampType, o.lampType);
     }
+
+
 }

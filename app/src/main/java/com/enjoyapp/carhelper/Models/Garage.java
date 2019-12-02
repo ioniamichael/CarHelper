@@ -3,6 +3,7 @@ package com.enjoyapp.carhelper.Models;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Garage {
 
@@ -42,6 +43,19 @@ public class Garage {
 
         @SerializedName("menahel_miktzoa")
         public String professionManager;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            GarageObject that = (GarageObject) o;
+            return garageNumber == that.garageNumber;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(garageNumber);
+        }
     }
 
     public Garage(ArrayList<GarageObject> garage) {
@@ -51,5 +65,7 @@ public class Garage {
     public ArrayList<GarageObject> getGarage() {
         return garage;
     }
+
+
 
 }
