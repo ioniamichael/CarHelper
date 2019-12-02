@@ -17,5 +17,12 @@
     <string name="sort_by">מיון לפי...</string>
     <string name="comma">,</string>
 
+    <string name="required_fields">Fields marked in red are required\nPlease fill them in and try again.</string>
+    <string name="wrong_email">Wrong email format\nTry again!</string>
+    <string name="get_started">Get Started</string>
+    <string name="log_in">Log In</string>
+    <string name="your_name">שמך?</string>
+    <string name="email">אימייל:</string>
+    <string name="password">סיסמא:</string>
 
 </resources>

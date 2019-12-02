@@ -1,4 +1,4 @@
-package com.enjoyapp.carhelper.Fragments;
+package com.enjoyapp.carhelper.Fragments.Lights;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.enjoyapp.carhelper.Fragments.Garage.GarageFragment;
+import com.enjoyapp.carhelper.Fragments.Lights.LightsFragment;
 import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.Screens.MainActivity;
 

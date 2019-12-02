@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.enjoyapp.carhelper.Fragments.LoaderFragment;
 import com.enjoyapp.carhelper.Listeners.OnGetDataListener;
 import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.Presenters.LightsPresenter;

@@ -8,4 +8,6 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="mainTextColor">#1a233d</color>
+    <color name="wrong_input_color">#FF6060</color>
+    <color name="wrong_text">#40FFFFFF</color>
 </resources>

@@ -1,6 +1,5 @@
-package com.enjoyapp.carhelper.Fragments;
+package com.enjoyapp.carhelper.Fragments.Lights;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +10,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.enjoyapp.carhelper.Adapters.LightsAdapter;
+import com.enjoyapp.carhelper.Fragments.Loaders.LoaderFragment;
 import com.enjoyapp.carhelper.Models.Light;
 import com.enjoyapp.carhelper.Presenters.LightsPresenter;
 import com.enjoyapp.carhelper.R;
@@ -40,6 +38,8 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     private Animation mAnimation;
     private ImageView mIVShadow;
     private LoaderFragment loaderFragment = new LoaderFragment();
+    
+    private String TAG = "LightsFragment";
 
     public LightsFragment() {
     }
@@ -48,15 +48,12 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (view == null) {
+            Log.d(TAG, "onCreateView: view is null");
             view = inflater.inflate(R.layout.fragment_lights, container, false);
             initView(view);
         }
+        Log.d(TAG, "onCreateView: View is not null ");
         return view;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
     }
 
     @Override
@@ -64,6 +61,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
         super.onResume();
         mLightsView = new LightsView(mLightsArray, mLight, this);
         mLightsView.loadData();
+        Log.d(TAG, "onResume: ");
     }
 
     //Setting adapter parameters.
@@ -153,6 +151,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     public void onDestroyView() {
         super.onDestroyView();
         mIVShadow.setVisibility(View.GONE);
+        Log.d(TAG, "onDestroyView: ");
     }
 
 

@@ -13,11 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.enjoyapp.carhelper.Fragments.GarageFragment;
-import com.enjoyapp.carhelper.Fragments.LightsFragment;
-import com.enjoyapp.carhelper.Fragments.SortFragment;
+import com.enjoyapp.carhelper.Fragments.Garage.GarageFragment;
+import com.enjoyapp.carhelper.Fragments.Lights.LightsFragment;
+import com.enjoyapp.carhelper.Fragments.Lights.SortFragment;
 import com.enjoyapp.carhelper.Models.Greetings;
 import com.enjoyapp.carhelper.R;
+import com.enjoyapp.carhelper.Singletons.UserSingleton;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.activity_main);
         initView();
         initFunctions();
-
     }
 
     public void initFunctions() {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void showLightsFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_fragment_container, new LightsFragment())
+                .replace(R.id.main_fragment_container, this.mLightsFragment)
                 .commit();
     }
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     public void showGreetings() {
-        mTVgreetings.setText(mGreetings.getGreetings());
+        mTVgreetings.setText(mGreetings.getGreetings() + "," + UserSingleton.getInstance().getmName());
     }
 
     @Override

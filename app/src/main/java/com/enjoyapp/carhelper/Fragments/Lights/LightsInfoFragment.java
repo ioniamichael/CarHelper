@@ -1,4 +1,4 @@
-package com.enjoyapp.carhelper.Fragments;
+package com.enjoyapp.carhelper.Fragments.Lights;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

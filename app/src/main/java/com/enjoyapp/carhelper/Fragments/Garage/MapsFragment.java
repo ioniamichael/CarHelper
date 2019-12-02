@@ -1,4 +1,4 @@
-package com.enjoyapp.carhelper.Fragments;
+package com.enjoyapp.carhelper.Fragments.Garage;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
