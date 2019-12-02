@@ -1,0 +1,30 @@
+{
+    "garage": [
+        {
+            "mispar_mosah": 16,
+            "shem_mosah": "נירים מוסך הקבוץ",
+            "cod_sug_mosah": 6,
+            "sug_mosah": "מוסך מורשה",
+            "ktovet": "דנ הנגב",
+            "yishuv": "נירים",
+            "telephone": "054-7916219",
+            "mikud": 85125,
+            "cod_miktzoa": 10,
+            "miktzoa": "מכונאות רכב בנזין",
+            "menahel_miktzoa": "אליהו ציון"
+        },
+        {
+            "mispar_mosah": 16,
+            "shem_mosah": "נירים מוסך הקבוץ",
+            "cod_sug_mosah": 6,
+            "sug_mosah": "מוסך מורשה",
+            "ktovet": "דנ הנגב",
+            "yishuv": "נירים",
+            "telephone": "054-7916219",
+            "mikud": 85125,
+            "cod_miktzoa": 20,
+            "miktzoa": "מכונאות רכב דיזל",
+            "menahel_miktzoa": "אליהו ציון"
+        }
+    ]
+}
