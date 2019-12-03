@@ -138,11 +138,13 @@
 
         <Button
             android:id="@+id/BTNsort"
+            android:elevation="5dp"
+            android:translationZ="5dp"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@drawable/sort_button_style"
             android:text="@string/sort_by"
-            android:textColor="@color/white"
+            android:textColor="@color/mainTextColor"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent" />

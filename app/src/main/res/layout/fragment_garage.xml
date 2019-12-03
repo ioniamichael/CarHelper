@@ -4,14 +4,15 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:padding="5dp"
         android:layout_width="300dp"
-        android:layout_margin="10dp"
         android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:translationZ="5dp"
         android:background="@drawable/text_frame_style"
-        android:elevation="4dp"
-        android:textAlignment="center"
-        android:orientation="horizontal">
+        android:elevation="5dp"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:textAlignment="center">
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,36 +33,46 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></FrameLayout>
+
+        <TextView
+            android:id="@+id/garagesListCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/top_border"
+            android:elevation="5dp"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="10dp"
+            android:text="@string/garage_near"
+            android:textAlignment="center"
+            android:textColor="@color/mainTextColor"
+            android:textSize="18sp"
+            android:translationZ="5dp" />
+
+        <FrameLayout
+            android:id="@+id/garageListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </FrameLayout>
+
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/map_container"
-        android:layout_width="match_parent"
-        android:layout_height="400dp">
-
-    </FrameLayout>
-
-
-    <TextView
-        android:id="@+id/garagesListCount"
-        android:background="@drawable/garage_founds_title_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/garage_near"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="@color/mainTextColor"
-        android:textSize="18sp"
-        android:layout_above="@+id/garageListContainer"/>
-
-    <FrameLayout
-        android:id="@+id/garageListContainer"
-        android:layout_below="@id/map_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
 
 </RelativeLayout>
