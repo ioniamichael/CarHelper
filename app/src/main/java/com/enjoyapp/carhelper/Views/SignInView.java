@@ -39,7 +39,9 @@ public class SignInView {
         this.signInPresenter = signInPresenter;
         this.emailAndPasswordPresenter = emailAndPasswordPresenter;
         this.context = context;
+    }
 
+    public SignInView() {
     }
 
     public void registerUser(String mName, String mEmail, String mPassword) {
@@ -83,7 +85,7 @@ public class SignInView {
                     signInPresenter.showFailedAnimation();
                 }
             });
-        }else{
+        } else {
             customToast.showToast(R.string.wrong_email);
         }
     }
@@ -125,5 +127,9 @@ public class SignInView {
             return true;
         }
         return false;
+    }
+
+    public void signOut() {
+        mAuth.signOut();
     }
 }

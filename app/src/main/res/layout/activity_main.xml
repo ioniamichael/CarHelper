@@ -9,29 +9,51 @@
     android:layoutDirection="rtl"
     tools:mContext=".Screens.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/greetingsLayout"
+    <RelativeLayout
+        android:id="@+id/LogoAndDisconnectContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/TVgreetings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="28sp"
-            tools:text="בוקר טוב" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="-10dp"
+            android:tint="@color/mainTextColor"
+            card_view:srcCompat="@drawable/mainlogo" />
+
+        <ImageView
+            android:id="@+id/disconnectBTN"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:rotation="180"
+            android:tint="@color/mainTextColor"
+            card_view:srcCompat="@drawable/disconnect_button_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/TVgreetings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LogoAndDisconnectContainer"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/mainTextColor"
+        android:textSize="18sp"
+        tools:text="בוקר טוב" />
+
 
     <LinearLayout
         android:id="@+id/tabsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/greetingsLayout"
+        android:layout_below="@id/TVgreetings"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -82,12 +104,12 @@
         android:layout_below="@id/tabsLayout">
 
         <ImageView
-            android:contentDescription="@string/shadow_divider"
             android:id="@+id/IVdivider"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:contentDescription="@string/shadow_divider"
             android:elevation="1dp"
             card_view:srcCompat="@drawable/divider" />
     </FrameLayout>
@@ -98,12 +120,12 @@
         android:gravity="bottom">
 
         <ImageView
-            android:contentDescription="@string/shadow_divider"
-            android:tint="@color/mainBackgroundColor"
             android:id="@+id/IVShadow"
-            android:layout_marginBottom="-170dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="-170dp"
+            android:contentDescription="@string/shadow_divider"
+            android:tint="@color/mainBackgroundColor"
             card_view:srcCompat="@drawable/black_shadow" />
     </RelativeLayout>
 
@@ -113,7 +135,6 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp">
-
 
         <Button
             android:id="@+id/BTNsort"
@@ -136,6 +157,7 @@
         </FrameLayout>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/light_indo_rootView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -150,8 +172,7 @@
                 android:id="@+id/light_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/light_info_frame_style">
-            </FrameLayout>
+                android:background="@drawable/light_info_frame_style"></FrameLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

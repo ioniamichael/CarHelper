@@ -1,12 +1,14 @@
 package com.enjoyapp.carhelper.Screens;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.enjoyapp.carhelper.Fragments.Lights.SortFragment;
 import com.enjoyapp.carhelper.Models.Greetings;
 import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.Singletons.UserSingleton;
+import com.enjoyapp.carhelper.Views.SignInView;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -26,16 +29,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private TextView mTVgreetings;
     private LightsFragment mLightsFragment = new LightsFragment();
     private Button mBTNmLights, mBTNmGarage, mBTNsort;
+    private ImageView mDisconnectBTN;
     private GarageFragment mGarageFragment = new GarageFragment();
     private Fragment mCurrentFragment;
     private Animation mAnimation;
     private boolean isSortFragmentOpen = false;
     private CardView mGarageBTNRootView, mLightsBTNRootView;
+    private SignInView signInView;
+    private CardView mLight_indo_rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        signInView = new SignInView();
         initView();
         initFunctions();
     }
@@ -49,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public void initView() {
         mCurrentFragment = getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
         mTVgreetings = findViewById(R.id.TVgreetings);
+        mDisconnectBTN = findViewById(R.id.disconnectBTN);
         mBTNmLights = findViewById(R.id.BTNlights);
         mBTNmGarage = findViewById(R.id.BTNgarage);
         mBTNsort = findViewById(R.id.BTNsort);
@@ -57,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mBTNmLights.setOnTouchListener(this);
         mBTNmGarage.setOnTouchListener(this);
         mBTNsort.setOnTouchListener(this);
+        mLight_indo_rootView = findViewById(R.id.light_indo_rootView);
+        mLight_indo_rootView.setClickable(true);
+        mDisconnectBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signInView.signOut();
+                openLoginActivity();
+            }
+        });
 
     }
 
@@ -140,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         break;
                 }
                 break;
+
         }
         removeLightsInfoFragment();
         return true;
@@ -153,5 +171,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     .remove(fragment)
                     .commit();
         }
+    }
+
+    public void openLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
