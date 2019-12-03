@@ -19,14 +19,12 @@ public class GarageFragment extends Fragment {
     private TextView mTVAddress, mGaragesListCount;
     private AddressFinder mAddressFinder;
     private CustomToast mCustomToast;
-    private GarageListFragment mGarageListFragment;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_garage, container, false);
-        mGarageListFragment = new GarageListFragment();
         mTVAddress = view.findViewById(R.id.TVAddress);
         mGaragesListCount = view.findViewById(R.id.garagesListCount);
         mAddressFinder = new AddressFinder(getContext(), getActivity());
@@ -39,7 +37,6 @@ public class GarageFragment extends Fragment {
         super.onResume();
         getAddress();
         showMap();
-        showGaragesListFragment();
         getActivity().findViewById(R.id.BTNsort).setVisibility(View.GONE);
     }
 
@@ -63,11 +60,6 @@ public class GarageFragment extends Fragment {
 
     public void showMap() {
         getFragmentManager().beginTransaction().replace(R.id.map_container, new MapsFragment())
-                .commit();
-    }
-
-    public void showGaragesListFragment() {
-        getFragmentManager().beginTransaction().replace(R.id.garageListContainer, mGarageListFragment)
                 .commit();
     }
 }

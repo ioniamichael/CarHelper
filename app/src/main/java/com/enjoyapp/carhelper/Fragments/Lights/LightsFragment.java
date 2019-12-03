@@ -132,17 +132,23 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     //Getting light's data
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
-        public void respond(int position, String lightsTitle, String lightsDesc) {
+        public void respond(int position, String lightsTitle, String lightsDesc, String imageURL) {
             mLightsInfoFragment = new LightsInfoFragment();
             Bundle bundle = new Bundle();
             bundle.putString("LIGHTS_TITLE", lightsTitle);
             bundle.putString("LIGHTS_DESC", lightsDesc);
+            bundle.putString("IMAGE_URL", imageURL);
             mLightsInfoFragment.setArguments(bundle);
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.enter_right_to_left_light_info,
                             R.anim.exit_right_to_left_lights_info)
                     .replace(R.id.light_info_container, mLightsInfoFragment)
                     .commit();
+        }
+
+        @Override
+        public void respond(int position, String phoneNumber) {
+
         }
     };
 

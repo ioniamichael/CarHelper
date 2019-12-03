@@ -83,7 +83,7 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
                     onLightImageTouchListener.onLightImageTouch(position, motionEvent, holder);
                 }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    mCommunicator.respond(position, lights.get(position).getLampTitle(), lights.get(position).getLampDesc());
+                    mCommunicator.respond(position, lights.get(position).getLampTitle(), lights.get(position).getLampDesc(), lights.get(position).getLampImageUrl());
                 }
                 return true;
             }

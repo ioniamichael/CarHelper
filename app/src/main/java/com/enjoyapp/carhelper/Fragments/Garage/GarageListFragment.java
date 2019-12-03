@@ -1,10 +1,12 @@
 package com.enjoyapp.carhelper.Fragments.Garage;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,10 +29,18 @@ import java.util.Objects;
 public class GarageListFragment extends Fragment {
 
     private RecyclerView mRVGarage;
+    private Fragment fragment;
     private Garage mGarage;
     private ArrayList<Garage.GarageObject> mGarageObjects = new ArrayList<>();
     private GaragesAdapter mAdapter;
+    private GarageFragment mGarageFragment;
+    private TextView mGarageCount;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGarageFragment = new GarageFragment();
+    }
 
     @Nullable
     @Override
@@ -42,7 +52,12 @@ public class GarageListFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRVGarage.setLayoutManager(layoutManager);
         mRVGarage.setAdapter(mAdapter);
-
+        mAdapter.setOnPhoneNumberClickListener(new GaragesAdapter.OnPhoneNumberClickListener() {
+            @Override
+            public void onPhoneNumberClick(int position, String phone) {
+                dialGarage(phone);
+            }
+        });
         return view;
     }
 
@@ -69,11 +84,22 @@ public class GarageListFragment extends Fragment {
                     }
                 }
             }
-
-            Log.d("AfterEdit", "readData: " + mGarageObjects.size());
+            setGaragesCount();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //Set garages count on garage fragment
+    public void setGaragesCount() {
+        fragment = getFragmentManager().findFragmentById(R.id.main_fragment_container);
+        mGarageCount = fragment.getView().findViewById(R.id.garagesListCount);
+        mGarageCount.setText(String.valueOf(mGarageObjects.size()));
+        mGarageCount.setText("נמצאו " + mGarageObjects.size() + " מוסכים בסביבתך.");
+    }
+
+    private void dialGarage(String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+        startActivity(intent);
+    }
 }

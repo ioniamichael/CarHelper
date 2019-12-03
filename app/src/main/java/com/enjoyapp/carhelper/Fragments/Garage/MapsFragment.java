@@ -28,6 +28,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private SupportMapFragment mMapFragment;
     private GoogleMap mMap;
+    private GarageListFragment mGarageListFragment;
     private LocationFinder mLocationFinder;
 
 
@@ -68,9 +69,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        showGaragesListFragment();
     }
 
-
+    //Garage list will be shown after map is ready.
+    public void showGaragesListFragment() {
+        getFragmentManager().beginTransaction().replace(R.id.garageListContainer, new GarageListFragment()).commit();
+    }
 
 }
 

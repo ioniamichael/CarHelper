@@ -2,9 +2,11 @@ package com.enjoyapp.carhelper.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,19 +14,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.enjoyapp.carhelper.Models.Garage;
 import com.enjoyapp.carhelper.R;
+import com.enjoyapp.carhelper.Utils.FragmentCommunication;
 
 import java.util.List;
 
 public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageViewHolder> {
 
     private Context context;
-    //    private ArrayList<Garage.GarageObject> garages;
     private List<Garage.GarageObject> garageObjects;
     private Garage garage;
+    private OnPhoneNumberClickListener onPhoneNumberClickListener;
+    private int selected = -1;
+
+
+    public interface OnPhoneNumberClickListener {
+        void onPhoneNumberClick(int position, String phone);
+    }
+
+    public void setOnPhoneNumberClickListener(OnPhoneNumberClickListener onPhoneNumberClickListener) {
+        this.onPhoneNumberClickListener = onPhoneNumberClickListener;
+    }
 
     public GaragesAdapter(Context context, List<Garage.GarageObject> garageObjects) {
         this.context = context;
-//        this.garages = garage.getGarage();
         this.garageObjects = garageObjects;
     }
 
@@ -37,11 +49,24 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull GarageViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final GarageViewHolder holder, int position) {
+        holder.mGarageItemRootView.setTag(position);
         holder.mGarageName.setText(garageObjects.get(position).garageName);
         holder.mGarageAddress.setText(garageObjects.get(position).garageAddress + context.getString(R.string.comma) + garageObjects.get(position).garageCity);
         holder.mGaragePhoneNumber.setText(garageObjects.get(position).garagePhone);
         holder.mGarageType.setText(garageObjects.get(position).garageType);
+
+        holder.mGarageItemRootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (int) view.getTag();
+                selected = position;
+                if (onPhoneNumberClickListener != null) {
+                    onPhoneNumberClickListener.onPhoneNumberClick(position, holder.mGaragePhoneNumber.getText().toString().trim());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -58,6 +83,7 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
         private TextView mGaragePhoneNumber;
         private TextView mGarageType;
         private TextView mGarageAddress;
+        private LinearLayout mGarageItemRootView;
 
         public GarageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +91,7 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
             mGaragePhoneNumber = itemView.findViewById(R.id.garagePhoneNumber);
             mGarageType = itemView.findViewById(R.id.garageType);
             mGarageAddress = itemView.findViewById(R.id.garageAddress);
+            mGarageItemRootView = itemView.findViewById(R.id.garageItemRootView);
         }
     }
 
