@@ -17,6 +17,7 @@
         android:padding="10dp">
 
         <ImageView
+            android:contentDescription="@string/app_logo_cd"
             android:id="@+id/logo"
             android:layout_width="150dp"
             android:layout_height="50dp"
@@ -26,6 +27,7 @@
             card_view:srcCompat="@drawable/mainlogo" />
 
         <ImageView
+            android:contentDescription="@string/disconnect_button_cd"
             android:id="@+id/disconnectBTN"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -37,7 +39,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/TVgreetings"
+        android:id="@+id/TVGreetings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LogoAndDisconnectContainer"
@@ -53,7 +55,7 @@
         android:id="@+id/tabsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/TVgreetings"
+        android:layout_below="@id/TVGreetings"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -67,7 +69,7 @@
             card_view:cardElevation="3dp">
 
             <Button
-                android:id="@+id/BTNlights"
+                android:id="@+id/BTNLights"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/tabs_style"
@@ -87,7 +89,7 @@
             card_view:cardElevation="3dp">
 
             <Button
-                android:id="@+id/BTNgarage"
+                android:id="@+id/BTNGarage"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/tabs_style"
@@ -104,7 +106,7 @@
         android:layout_below="@id/tabsLayout">
 
         <ImageView
-            android:id="@+id/IVdivider"
+            android:id="@+id/IVDivider"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
@@ -137,29 +139,27 @@
         android:layout_marginBottom="10dp">
 
         <Button
-            android:id="@+id/BTNsort"
-            android:elevation="5dp"
-            android:translationZ="5dp"
+            android:id="@+id/BTNSort"
             android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="@drawable/sort_button_style"
+            android:layout_height="60dp"
             android:text="@string/sort_by"
             android:textColor="@color/mainTextColor"
             android:textStyle="bold"
+            android:background="@drawable/right_border"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent" />
 
         <FrameLayout
             android:id="@+id/sort_fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent">
 
         </FrameLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/light_indo_rootView"
+            android:id="@+id/light_info_rootView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -174,7 +174,9 @@
                 android:id="@+id/light_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/light_info_frame_style"></FrameLayout>
+                android:background="@drawable/light_info_frame_style">
+
+            </FrameLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

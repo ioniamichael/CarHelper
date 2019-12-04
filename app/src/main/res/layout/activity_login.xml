@@ -5,9 +5,8 @@
     android:layoutDirection="rtl"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/mainBackgroundColor"
     android:layout_height="match_parent"
-    tools:context=".Screens.LoginActivity">
+    tools:context=".screens.LoginActivity">
 
     <TextView
         android:id="@+id/requiredFieldsTXT"

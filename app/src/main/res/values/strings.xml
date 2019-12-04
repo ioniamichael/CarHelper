@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">CarHelper</string>
-    <string name="welcome_text">ברוכים הבאים</string>
-    <string name="app_description">לאפליקציה שתעזור לכם\nלנטר את התקלה ברכבכם</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="location_not_found">לא הצלחנו לאתר את המיקום!\nיתכן אינך מחובר לרשת.</string>
     <string name="title_activity_maps">Map</string>
     <string name="garage_json">garages.json</string>
@@ -14,7 +9,7 @@
     <string name="lights_text">נורות הזהרה</string>
     <string name="find_garage">מצא מוסך</string>
     <string name="shadow_divider">shadowDivider</string>
-    <string name="sort_by">מיון לפי...</string>
+    <string name="sort_by">מיון לפי…</string>
     <string name="comma">,</string>
 
     <string name="required_fields">השדות המסומנים באדום הם שדות חובה\nיש למלא אותם ולנסות שוב.</string>
@@ -25,5 +20,14 @@
     <string name="email">אימייל:</string>
 
     <string name="password">סיסמא:</string>
+    <string name="history_empty_text">כאן יופיעו חיפוישם אחרונים</string>
+    <string name="app_logo_cd">app_logo</string>
+    <string name="disconnect_button_cd">disconnectButton</string>
+    <string name="no_accessibility">no accessibility</string>
+    <string name="loading">טוען נתונים...</string>
+    <string name="garage_name">שם המוסך</string>
+    <string name="garage_phone">טלפון</string>
+    <string name="garage_type">סוג מוסך</string>
+    <string name="garage_address">כתובת המוסך</string>
 
 </resources>

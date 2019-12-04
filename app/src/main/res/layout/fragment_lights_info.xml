@@ -10,6 +10,7 @@
 
 
         <ImageView
+            android:contentDescription="@string/no_accessibility"
             android:id="@+id/lightIMG"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -61,6 +62,7 @@
             tools:text="lightType" />
 
         <ImageView
+            android:contentDescription="@string/no_accessibility"
             android:id="@+id/backButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -72,6 +74,7 @@
             app:srcCompat="?attr/actionModeCloseDrawable" />
 
         <ImageView
+            android:contentDescription="@string/no_accessibility"
             android:id="@+id/whatsAppButton"
             android:layout_width="50dp"
             android:layout_height="50dp"

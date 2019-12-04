@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-    android:background="@color/mainBackgroundColor"
-    tools:context=".Screens.SplashActivity">
+    tools:context=".screens.SplashActivity">
 
     <TextView
         android:id="@+id/loadingText"
@@ -15,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Loading..."
+        android:text="@string/loading"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
