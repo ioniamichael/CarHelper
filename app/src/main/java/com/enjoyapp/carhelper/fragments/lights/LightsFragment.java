@@ -50,11 +50,9 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (view == null) {
-            Log.d(TAG, "onCreateView: view is null");
             view = inflater.inflate(R.layout.fragment_lights, container, false);
             initView(view);
         }
-        Log.d(TAG, "onCreateView: View is not null ");
         return view;
     }
 
@@ -63,7 +61,6 @@ public class LightsFragment extends Fragment implements LightsPresenter {
         super.onResume();
         mLightsView = new LightsView(mLightsArray, mLight, this);
         mLightsView.loadData();
-        Log.d(TAG, "onResume: ");
     }
 
     //Setting adapter parameters.
@@ -84,7 +81,6 @@ public class LightsFragment extends Fragment implements LightsPresenter {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
                     holder.itemView.startAnimation(mAnimation);
-                    Log.d("IsTouched", "positionTouchedDown " + position);
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.removeSortFragment();
                 }
@@ -105,14 +101,14 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     @Override
     public void startLoadAnimation() {
         assert getFragmentManager() != null;
-        Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(getFragmentManager().findFragmentById(R.id.main_fragment_container)).getActivity()))
+        getFragmentManager().findFragmentById(R.id.main_fragment_container).getActivity()
                 .getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, this.loaderFragment).commit();
     }
 
     @Override
     public void stopLoadAnimation() {
         if (getFragmentManager() != null) {
-            Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(getFragmentManager().findFragmentById(R.id.main_fragment_container)).getActivity()))
+            getFragmentManager().findFragmentById(R.id.main_fragment_container).getActivity()
                     .getSupportFragmentManager().beginTransaction().remove(this.loaderFragment).commit();
         }
     }
@@ -127,7 +123,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     //Initializing views.
     public void initView(View view) {
         mRVLights = view.findViewById(R.id.RVLights);
-        mIVShadow = Objects.requireNonNull(getActivity()).findViewById(R.id.IVShadow);
+        mIVShadow = getActivity().findViewById(R.id.IVShadow);
         mIVShadow.setVisibility(View.VISIBLE);
 
     }
@@ -142,7 +138,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
             bundle.putString("LIGHTS_DESC", lightsDesc);
             bundle.putString("IMAGE_URL", imageURL);
             mLightsInfoFragment.setArguments(bundle);
-            Objects.requireNonNull(getFragmentManager()).beginTransaction()
+            getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.enter_right_to_left_light_info,
                             R.anim.exit_right_to_left_lights_info)
                     .replace(R.id.light_info_container, mLightsInfoFragment)
@@ -155,7 +151,6 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     public void onDestroyView() {
         super.onDestroyView();
         mIVShadow.setVisibility(View.GONE);
-        Log.d(TAG, "onDestroyView: ");
     }
 
 

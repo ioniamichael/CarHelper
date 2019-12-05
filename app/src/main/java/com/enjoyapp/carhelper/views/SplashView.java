@@ -31,19 +31,16 @@ public class SplashView {
         getUserName(user, new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                Log.d("DATAIS", "onSuccess: " + mName);
                 UserSingleton.getInstance().setmName(mName);
                 presenter.openMainActivity();
             }
 
             @Override
             public void onStart() {
-                Log.d("DATAIS", "onStart: Downloading data");
             }
 
             @Override
             public void onFailure() {
-                Log.d("DATAIS", "onFailure: Downloading failed");
             }
         });
     }

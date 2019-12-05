@@ -33,14 +33,12 @@ public class LightsView {
         readData(mLightsRef, new OnGetDataListener() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                Log.d("DataLoaded", "onSuccess: ");
                 mLightsPresenter.stopLoadAnimation();
                 mLightsPresenter.setAdapter();
             }
 
             @Override
             public void onStart() {
-                Log.d("DataLoaded", "onStart: ");
                 mLightsPresenter.clearRecyclerView();
                 mLightsPresenter.startLoadAnimation();
 
@@ -48,7 +46,6 @@ public class LightsView {
 
             @Override
             public void onFailure() {
-                Log.d("DataLoaded", "onFailure: ");
             }
         });
     }

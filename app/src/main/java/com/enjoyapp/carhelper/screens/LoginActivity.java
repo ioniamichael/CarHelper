@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //Getting name, email and password from email and password fragment and setting them in UserSingleton.
     public void setUserDetailsFromInputFields() {
-        mName = ((EditText) Objects.requireNonNull(mEmailAndPasswordFragment.getView())
+        mName = ((EditText) mEmailAndPasswordFragment.getView()
                 .findViewById(R.id.ETName))
                 .getText().toString().trim();
         mEmail = ((EditText) mEmailAndPasswordFragment.getView()

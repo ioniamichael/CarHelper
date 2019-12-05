@@ -66,7 +66,7 @@ public class LightsInfoFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.backButton:
-                Objects.requireNonNull(getFragmentManager()).beginTransaction().remove(this).commit();
+                getFragmentManager().beginTransaction().remove(this).commit();
                 break;
             case R.id.whatsAppButton:
                 sendMessage();

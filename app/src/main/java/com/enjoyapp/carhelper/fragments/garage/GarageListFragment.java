@@ -1,5 +1,6 @@
 package com.enjoyapp.carhelper.fragments.garage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,19 +15,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.adapters.GaragesAdapter;
 import com.enjoyapp.carhelper.models.Garage;
-import com.enjoyapp.carhelper.R;
-import com.enjoyapp.carhelper.singletons.AddressSingleton;
-import com.google.gson.Gson;
+import com.enjoyapp.carhelper.presenters.GarageListPresenter;
+import com.enjoyapp.carhelper.views.GarageListView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class GarageListFragment extends Fragment {
+public class GarageListFragment extends Fragment implements GarageListPresenter {
 
     private RecyclerView mRVGarage;
     private Fragment fragment;
@@ -34,6 +31,7 @@ public class GarageListFragment extends Fragment {
     private ArrayList<Garage.GarageObject> mGarageObjects = new ArrayList<>();
     private GaragesAdapter mAdapter;
     private TextView mGarageCount;
+    private GarageListView garageListView;
 
     @Override
     public void onResume() {
@@ -44,9 +42,32 @@ public class GarageListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_garage_list, container, false);
-        readData();
         mRVGarage = view.findViewById(R.id.RVGarage);
-        mAdapter = new GaragesAdapter(getActivity(), mGarageObjects);
+        garageListView = new GarageListView(this, getContext(), getActivity());
+        garageListView.loadData();
+
+        return view;
+    }
+
+    private void dialGarage(String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+        startActivity(intent);
+    }
+
+    //Set garages count on garage fragment
+    @Override
+    public void setGaragesCount(int garagesCount) {
+        fragment = getFragmentManager().findFragmentById(R.id.main_fragment_container);
+        if (fragment != null) {
+            mGarageCount = fragment.getView().findViewById(R.id.garagesListCount);
+        }
+        mGarageCount.setText(String.valueOf(mGarageObjects.size()));
+        mGarageCount.setText("נמצאו " + garagesCount + " מוסכים בסביבתך! ");
+    }
+
+    @Override
+    public void setAdapter(Activity activity, ArrayList<Garage.GarageObject> garageObjects) {
+        mAdapter = new GaragesAdapter(activity, garageObjects);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRVGarage.setLayoutManager(layoutManager);
         mRVGarage.setAdapter(mAdapter);
@@ -56,50 +77,5 @@ public class GarageListFragment extends Fragment {
                 dialGarage(phone);
             }
         });
-        return view;
-    }
-
-    public void readData() {
-        String json_string;
-
-        try {
-            InputStream inputStream = Objects.requireNonNull(getActivity()).getAssets().open(getString(R.string.garage_json));
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-
-            json_string = new String(buffer, StandardCharsets.UTF_8);
-            Gson gson = new Gson();
-            mGarage = gson.fromJson(json_string, Garage.class);
-
-
-            for (int i = 0; i < 13273; i++) {
-                if (mGarage.getGarage().get(i).garageCity.equals(AddressSingleton.getInstance().getmCurrentAddress())) {
-                    if (!mGarageObjects.contains(mGarage.getGarage().get(i))) {
-                        mGarageObjects.add(mGarage.getGarage().get(i));
-//                        Log.d("AfterEdit", "readData: " + mGarageObjects.get(i).garageName);
-                    }
-                }
-            }
-            setGaragesCount();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Set garages count on garage fragment
-    public void setGaragesCount() {
-        fragment = Objects.requireNonNull(getFragmentManager()).findFragmentById(R.id.main_fragment_container);
-        if (fragment != null) {
-            mGarageCount = Objects.requireNonNull(fragment.getView()).findViewById(R.id.garagesListCount);
-        }
-        mGarageCount.setText(String.valueOf(mGarageObjects.size()));
-        mGarageCount.setText("נמצאו " + mGarageObjects.size() + " מוסכים בסביבתך! ");
-    }
-
-    private void dialGarage(String phone) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
-        startActivity(intent);
     }
 }

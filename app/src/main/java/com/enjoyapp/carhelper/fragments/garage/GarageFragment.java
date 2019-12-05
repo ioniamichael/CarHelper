@@ -41,13 +41,14 @@ public class GarageFragment extends Fragment {
         super.onResume();
         getAddress();
         showMap();
-        Objects.requireNonNull(getActivity()).findViewById(R.id.BTNSort).setVisibility(View.GONE);
+        showGarageListFragment();
+        getActivity().findViewById(R.id.BTNSort).setVisibility(View.GONE);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Objects.requireNonNull(getActivity()).findViewById(R.id.BTNSort).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.BTNSort).setVisibility(View.VISIBLE);
 
     }
 
@@ -67,5 +68,8 @@ public class GarageFragment extends Fragment {
             getFragmentManager().beginTransaction().replace(R.id.map_container, new MapsFragment())
                     .commit();
         }
+    }
+    private void showGarageListFragment(){
+        getFragmentManager().beginTransaction().replace(R.id.garageListContainer, new GarageListFragment()).commit();
     }
 }

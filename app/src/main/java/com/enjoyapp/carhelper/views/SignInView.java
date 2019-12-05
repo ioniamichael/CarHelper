@@ -65,12 +65,10 @@ public class SignInView {
                                             signInPresenter.stopGetStartedButton();
                                             signInPresenter.showSuccessAnimation();
                                             //TODO change open splash activity to open main activity.
-                                            Log.d(TAG, "onSuccess: DataBase writed " + UserSingleton.getInstance());
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure: User not writed to database " + e.getMessage());
                                     customToast.showToast(e.getMessage());
                                     signInPresenter.stopGetStartedButton();
                                     signInPresenter.showFailedAnimation();
@@ -105,19 +103,16 @@ public class SignInView {
                         public void onSuccess(AuthResult authResult) {
                             signInPresenter.stopSignInButtonAnim();
                             signInPresenter.showSuccessAnimation();
-                            Log.d(TAG, "Sign in success");
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     customToast.showToast(e.getMessage());
-                    Log.d(TAG, "onFailure: SignIn failure");
                     signInPresenter.stopSignInButtonAnim();
                     signInPresenter.showFailedAnimation();
                 }
             });
         } else {
-            Log.d(TAG, "signIn: Wrong Email");
             customToast.showToast(R.string.wrong_email);
         }
     }
