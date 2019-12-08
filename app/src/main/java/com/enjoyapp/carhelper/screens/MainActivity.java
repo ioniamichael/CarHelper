@@ -23,7 +23,7 @@ import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.singletons.UserSingleton;
 import com.enjoyapp.carhelper.views.SignInView;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
 
     private Greetings mGreetings = new Greetings();
     private TextView mTVgreetings;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private boolean isSortFragmentOpen = false;
     private CardView mGarageBTNRootView, mLightsBTNRootView;
     private SignInView signInView;
-    private CardView mLight_indo_rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mBTNmLights.setOnTouchListener(this);
         mBTNmGarage.setOnTouchListener(this);
         mBTNsort.setOnTouchListener(this);
-        mLight_indo_rootView = findViewById(R.id.light_info_rootView);
-        mLight_indo_rootView.setClickable(true);
         mDisconnectBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void removeLightsInfoFragment() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.light_info_container);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.lightsInfoContainer);
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -177,5 +174,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

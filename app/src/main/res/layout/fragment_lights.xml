@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,37 +11,50 @@
         android:id="@+id/RVLights"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/historyContainer"/>
+        android:layout_above="@id/historyContainer" />
 
-    <FrameLayout
-        android:id="@+id/lightsInfoContainer"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:padding="15dp"
+        android:id="@+id/lightsInfoRootViewContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom">
+        android:layout_above="@id/historyContainer"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="25dp">
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/lightsInfoContainer"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
 
     <RelativeLayout
         android:id="@+id/historyContainer"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/top_border"
         android:elevation="5dp"
         android:paddingStart="100dp"
         android:translationZ="5dp"
         tools:ignore="RtlSymmetry">
 
+        <ListView
+            android:id="@+id/historyListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
         <TextView
             android:id="@+id/emptyHistoryTXT"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/history_empty_text"/>
-
-
-
+            android:text="@string/history_empty_text" />
     </RelativeLayout>
 
 </RelativeLayout>

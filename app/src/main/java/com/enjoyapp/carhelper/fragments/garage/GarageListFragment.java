@@ -76,6 +76,11 @@ public class GarageListFragment extends Fragment implements GarageListPresenter 
             public void onPhoneNumberClick(int position, String phone) {
                 dialGarage(phone);
             }
+
+            @Override
+            public void onRootViewClick(int position) {
+
+            }
         });
     }
 }

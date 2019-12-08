@@ -3,10 +3,12 @@ package com.enjoyapp.carhelper.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -82,8 +84,20 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
                 if (onLightImageTouchListener != null) {
                     onLightImageTouchListener.onLightImageTouch(position, motionEvent, holder);
                 }
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    holder.rootItemView.animate().translationZ(100);
+                    holder.rootItemView.animate().rotation(35);
+                }
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     mCommunicator.respond(position, lights.get(position).getLampTitle(), lights.get(position).getLampDesc(), lights.get(position).getLampImageUrl());
+                    holder.rootItemView.animate().translationZ(0);
+                    final android.os.Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.rootItemView.animate().rotation(0);
+                        }
+                    }, 300);
                 }
                 return true;
             }

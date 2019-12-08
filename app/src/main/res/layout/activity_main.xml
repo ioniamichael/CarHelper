@@ -157,27 +157,6 @@
             card_view:layout_constraintStart_toStartOf="parent">
 
         </FrameLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/light_info_rootView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:translationZ="10dp"
-            card_view:cardCornerRadius="25dp"
-            card_view:cardElevation="20dp"
-            card_view:layout_constraintBottom_toBottomOf="parent">
-
-            <FrameLayout
-                android:id="@+id/light_info_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/light_info_frame_style">
-
-            </FrameLayout>
-        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

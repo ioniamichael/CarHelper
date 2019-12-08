@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +25,7 @@ public class LightsInfoFragment extends Fragment implements View.OnClickListener
     private TextView mLightTitle, mLightDesc, mLightType;
     private String mLightsTitle, mLightsDesc, mImageURL;
     private ImageView mLightIMG;
+    private ConstraintLayout mLightsInfoRootView;
     private ImageView mBackButton, mWhatsAppButton;
 
     @Override
@@ -39,6 +42,15 @@ public class LightsInfoFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lights_info, container, false);
+        initViews(view);
+        showFragment();
+
+        return view;
+    }
+
+    public void initViews(View view) {
+        mLightsInfoRootView = view.findViewById(R.id.lightsInfoRootView);
+        mLightsInfoRootView.setClickable(true);
         mLightTitle = view.findViewById(R.id.lightTitle);
         mLightDesc = view.findViewById(R.id.lightDesc);
         mLightType = view.findViewById(R.id.lightType);
@@ -47,9 +59,6 @@ public class LightsInfoFragment extends Fragment implements View.OnClickListener
         mWhatsAppButton = view.findViewById(R.id.whatsAppButton);
         mWhatsAppButton.setOnClickListener(this);
         mBackButton.setOnClickListener(this);
-
-        showFragment();
-        return view;
     }
 
     private void showFragment() {

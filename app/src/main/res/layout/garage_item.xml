@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/garageItemRootView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/garageItemRootView"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="vertical"
-    android:background="@drawable/light_info_frame_style"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
     android:layout_marginEnd="10dp"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@drawable/light_info_frame_style"
+    android:orientation="vertical"
+    android:paddingStart="10dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp">
 
 
     <LinearLayout
@@ -23,39 +24,68 @@
 
         <TextView
             android:id="@+id/garageName"
-            tools:text="@string/garage_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            tools:text="@string/garage_name" />
 
         <TextView
-            tools:text="@string/garage_phone"
             android:id="@+id/garagePhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            tools:text="@string/garage_phone" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomLine"
-        android:layout_below="@id/topline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@id/topline"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
-            tools:text="@string/garage_type"
+
             android:id="@+id/garageType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            tools:text="@string/garage_type" />
 
         <TextView
-            tools:text="@string/garage_address"
             android:id="@+id/garageAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:text="@string/garage_address" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actionLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/bottomLine"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/IVWazeButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/waze_icon" />
+
+        <ImageView
+            android:id="@+id/IVPhoneButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:tint="@color/mainTextColor"
+            app:srcCompat="@drawable/phone_icon_png" />
+    </LinearLayout>
+
+
 </RelativeLayout>

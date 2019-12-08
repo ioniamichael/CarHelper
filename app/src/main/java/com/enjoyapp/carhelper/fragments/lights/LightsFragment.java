@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,19 +29,22 @@ import com.enjoyapp.carhelper.views.LightsView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 
 public class LightsFragment extends Fragment implements LightsPresenter {
 
     private RecyclerView mRVLights;
     private ArrayList<Light> mLightsArray = new ArrayList<>();
+    private ArrayList<String> mLightsHistory = new ArrayList<String>();
     private Light mLight;
     private LightsAdapter mLightsAdapter;
     private LightsView mLightsView;
+    private TextView mEmptyHistoryTXT;
     private View view;
     private LightsInfoFragment mLightsInfoFragment;
     private Animation mAnimation;
     private ImageView mIVShadow;
+    private ListView mHistoryListView;
+    private ArrayAdapter<String> adapter;
     private LoaderFragment loaderFragment = new LoaderFragment();
 
     private String TAG = "LightsFragment";
@@ -66,7 +72,6 @@ public class LightsFragment extends Fragment implements LightsPresenter {
     //Setting adapter parameters.
     @Override
     public void setAdapter() {
-
         mLightsAdapter = new LightsAdapter(getActivity(), mLightsArray, communication);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         mRVLights.setLayoutManager(layoutManager);
@@ -79,10 +84,18 @@ public class LightsFragment extends Fragment implements LightsPresenter {
             @Override
             public void onLightImageTouch(final int position, MotionEvent event, LightsAdapter.LightsViewHolder holder) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
-                    holder.itemView.startAnimation(mAnimation);
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.removeSortFragment();
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    mEmptyHistoryTXT.setVisibility(View.GONE);
+
+                    mLightsHistory.add(0, mLightsArray.get(position).getLampTitle());
+                    adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, mLightsHistory);
+                    mHistoryListView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                    Log.d(TAG, "onLightImageTouch: " + mLightsHistory.size());
                 }
             }
         });
@@ -95,9 +108,9 @@ public class LightsFragment extends Fragment implements LightsPresenter {
             mLightsArray.clear();
             mLightsAdapter.notifyDataSetChanged();
         }
-
     }
 
+    //Start loading animation until the RV data is received.
     @Override
     public void startLoadAnimation() {
         assert getFragmentManager() != null;
@@ -105,6 +118,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
                 .getSupportFragmentManager().beginTransaction().add(R.id.main_fragment_container, this.loaderFragment).commit();
     }
 
+    //Stop loading animation when RV data received.
     @Override
     public void stopLoadAnimation() {
         if (getFragmentManager() != null) {
@@ -125,7 +139,8 @@ public class LightsFragment extends Fragment implements LightsPresenter {
         mRVLights = view.findViewById(R.id.RVLights);
         mIVShadow = getActivity().findViewById(R.id.IVShadow);
         mIVShadow.setVisibility(View.VISIBLE);
-
+        mEmptyHistoryTXT = view.findViewById(R.id.emptyHistoryTXT);
+        mHistoryListView = view.findViewById(R.id.historyListView);
     }
 
     //Getting light's data
@@ -141,7 +156,7 @@ public class LightsFragment extends Fragment implements LightsPresenter {
             getFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.enter_right_to_left_light_info,
                             R.anim.exit_right_to_left_lights_info)
-                    .replace(R.id.light_info_container, mLightsInfoFragment)
+                    .replace(R.id.lightsInfoContainer, mLightsInfoFragment)
                     .commit();
         }
     };
@@ -152,6 +167,5 @@ public class LightsFragment extends Fragment implements LightsPresenter {
         super.onDestroyView();
         mIVShadow.setVisibility(View.GONE);
     }
-
 
 }
