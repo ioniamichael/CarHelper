@@ -116,21 +116,6 @@
             card_view:srcCompat="@drawable/divider" />
     </FrameLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
-
-        <ImageView
-            android:id="@+id/IVShadow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="-170dp"
-            android:contentDescription="@string/shadow_divider"
-            android:tint="@color/mainBackgroundColor"
-            card_view:srcCompat="@drawable/black_shadow" />
-    </RelativeLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrainLayout"
         android:layout_width="match_parent"

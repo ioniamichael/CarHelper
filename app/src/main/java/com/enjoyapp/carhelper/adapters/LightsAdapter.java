@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.enjoyapp.carhelper.models.Light;
 import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.utils.FragmentCommunication;
+import com.enjoyapp.carhelper.views.LightsHistoryView;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,8 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
         this.lights = lights;
         this.mCommunicator = mCommunicator;
     }
+
+
 
     public void updateData(ArrayList<Light> lights) {
         this.lights = lights;

@@ -9,52 +9,45 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVLights"
+        android:layout_above="@id/historyContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/historyContainer" />
+        android:layout_height="match_parent" />
 
     <androidx.cardview.widget.CardView
-        android:padding="15dp"
         android:id="@+id/lightsInfoRootViewContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/historyContainer"
+        android:layout_above="@+id/historyContainer"
         android:layout_margin="10dp"
+        android:padding="15dp"
         card_view:cardCornerRadius="25dp">
 
         <FrameLayout
             android:id="@+id/lightsInfoContainer"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/historyContainer"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/top_border"
-        android:elevation="5dp"
         android:paddingStart="100dp"
-        android:translationZ="5dp"
-        tools:ignore="RtlSymmetry">
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/top_border">
 
-        <ListView
-            android:id="@+id/historyListView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RVHistory"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </ListView>
+        </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/emptyHistoryTXT"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/history_empty_text" />
-    </RelativeLayout>
+
 
 </RelativeLayout>
