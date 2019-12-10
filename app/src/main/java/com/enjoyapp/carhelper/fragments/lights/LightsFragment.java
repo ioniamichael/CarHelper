@@ -103,20 +103,7 @@ public class LightsFragment extends Fragment implements LightsPresenter, LightsH
                     mainActivity.removeSortFragment();
                 }
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-
                     saveItemToHistory(position);
-
-
-//                    holder.IVremoveNote.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            int position = (int) view.getTag();
-//                            String key = keys.get(position);
-//                            Log.d("ItemDeleted", " item position" + position);
-//                            NotesManager nm = new NotesManager();
-//                            nm.removeNote(key);
-//                        }
-//                    });
                 }
             }
         });
@@ -216,6 +203,4 @@ public class LightsFragment extends Fragment implements LightsPresenter, LightsH
             lightsHistoryAdapter.notifyDataSetChanged();
         }
     }
-
-
 }

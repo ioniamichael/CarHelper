@@ -67,7 +67,6 @@ public class LightsAdapter extends RecyclerView.Adapter<LightsAdapter.LightsView
     public void onBindViewHolder(@NonNull final LightsViewHolder holder, final int position) {
         light = lights.get(position);
         holder.rootItemView.setTag(position);
-
         //Glide - image loader.
         if (context != null) {
             Glide.with(context)

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -43,6 +46,8 @@ public class LightsHistoryAdapter extends RecyclerView.Adapter<LightsHistoryAdap
     @Override
     public void onBindViewHolder(@NonNull LightsHistoryViewHolder holder, int position) {
         lightsHistory = lightsHistoryArrayList.get(position);
+        holder.mRootItemView.setTag(position);
+
         Glide.with(mContext)
                 .load(lightsHistory.getmLightsIMG())
                 .override(60)
@@ -62,13 +67,14 @@ public class LightsHistoryAdapter extends RecyclerView.Adapter<LightsHistoryAdap
 
     public class LightsHistoryViewHolder extends RecyclerView.ViewHolder {
 
+        private CardView mRootItemView;
         private ImageView mLightsHistoryIMG;
 
 
         public LightsHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             mLightsHistoryIMG = itemView.findViewById(R.id.lightsHistoryIMG);
-
+            mRootItemView = itemView.findViewById(R.id.rootItemView);
         }
     }
 }

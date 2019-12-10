@@ -15,7 +15,6 @@
     android:paddingEnd="10dp"
     android:paddingBottom="10dp">
 
-
     <LinearLayout
         android:id="@+id/topline"
         android:layout_width="match_parent"
@@ -66,8 +65,11 @@
         android:id="@+id/actionLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/bottomLine"
+        android:background="@drawable/garage_list_icon_border"
         android:orientation="horizontal">
 
 
