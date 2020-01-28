@@ -26,6 +26,7 @@ public class EmailAndPasswordFragment extends Fragment implements EmailAndPasswo
     private TextView mRequiredFieldsTXT;
     private Animation animation;
     private View view;
+    private boolean isRegisteredUser;
 
     @Nullable
     @Override
@@ -49,10 +50,18 @@ public class EmailAndPasswordFragment extends Fragment implements EmailAndPasswo
     }
 
     public ArrayList<EditText> getUIComponents() {
+        if (getArguments() != null) {
+            isRegisteredUser = getArguments().getBoolean("isRegisteredUser");
+        }
         UIComponents = new ArrayList();
-        UIComponents.add(mETemail);
-        UIComponents.add(mETName);
-        UIComponents.add(mETpassword);
+        if (isRegisteredUser) {
+            UIComponents.add(mETemail);
+            UIComponents.add(mETpassword);
+        } else {
+            UIComponents.add(mETemail);
+            UIComponents.add(mETName);
+            UIComponents.add(mETpassword);
+        }
         return UIComponents;
     }
 

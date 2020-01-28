@@ -88,10 +88,10 @@ public class SignInView {
         }
     }
 
-    public void signIn(String mName, String mEmail, String mPassword) {
+    public void signIn(String mEmail, String mPassword) {
         customToast = new CustomToast(context);
         validation = new EmailAndPasswordValidation();
-        if (mEmail.isEmpty() || mName.isEmpty() || mPassword.isEmpty()) {
+        if (mEmail.isEmpty()|| mPassword.isEmpty()) {
             emailAndPasswordPresenter.setUiForWrongInputs();
             return;
         }

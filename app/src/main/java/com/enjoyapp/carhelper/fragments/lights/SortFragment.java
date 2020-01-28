@@ -16,7 +16,7 @@ import com.enjoyapp.carhelper.screens.MainActivity;
 
 public class SortFragment extends Fragment implements View.OnClickListener {
 
-    private Button mFirst, mSecond, mThird;
+    private Button mFirst;
     private Fragment mCurrentFragment;
     private Fragment mSortFragment;
 
@@ -35,18 +35,13 @@ public class SortFragment extends Fragment implements View.OnClickListener {
         mCurrentFragment = getFragmentManager().findFragmentById(R.id.main_fragment_container);
         mSortFragment = getFragmentManager().findFragmentById(R.id.sort_fragment_container);
         mFirst = view.findViewById(R.id.firstButtonSort);
-        mSecond = view.findViewById(R.id.secondButtonSort);
-        mThird = view.findViewById(R.id.thirdButtonSort);
         mFirst.setOnClickListener(this);
-        mSecond.setOnClickListener(this);
-        mThird.setOnClickListener(this);
     }
 
     //Setting text according to main fragment - Lights fragment / Garage fragment.
     private void setTextAndVisibility() {
         if (mCurrentFragment instanceof LightsFragment) {
             mFirst.setVisibility(View.VISIBLE);
-            mSecond.setVisibility(View.VISIBLE);
             mFirst.setText("צבע הנורה");
 //            mSecond.setText("סוג תקלה");
         } else if (mCurrentFragment instanceof GarageFragment) {

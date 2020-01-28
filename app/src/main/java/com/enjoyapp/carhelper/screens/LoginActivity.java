@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String mEmail = null;
     private String mPassword = null;
     private LottieAnimationView mLAVLogin, mLAVGetStarted;
+    public boolean isRegisteredUser= false;
+    private Bundle args = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +104,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setUserDetailsFromInputFields();
         switch (view.getId()) {
             case R.id.getStartedBTN:
+                isRegisteredUser = false;
+
+                args.putBoolean("isRegisteredUser", isRegisteredUser);
+                mEmailAndPasswordFragment.setArguments(args);
                 signInView.registerUser(mName, mEmail, mPassword); // User registration
-                //TODO Registration
                 break;
             case R.id.logInBTN:
-                signInView.signIn(mName, mEmail, mPassword); // User sign in
-                //TODO Sign in
+                isRegisteredUser=true;
+                args.putBoolean("isRegisteredUser", isRegisteredUser);
+                mEmailAndPasswordFragment.setArguments(args);
+                signInView.signIn(mEmail, mPassword); // User sign in
                 break;
         }
     }

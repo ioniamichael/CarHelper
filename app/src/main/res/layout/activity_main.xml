@@ -16,15 +16,15 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <ImageView
+        <TextView
             android:contentDescription="@string/app_logo_cd"
             android:id="@+id/logo"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="-10dp"
-            android:tint="@color/mainTextColor"
-            card_view:srcCompat="@drawable/mainlogo" />
+            android:text="@string/carhelper"
+            android:drawableStart="@drawable/app_logo_icon_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:tint="@color/mainTextColor"/>
 
         <ImageView
             android:contentDescription="@string/disconnect_button_cd"

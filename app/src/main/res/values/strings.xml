@@ -29,5 +29,7 @@
     <string name="garage_phone">טלפון</string>
     <string name="garage_type">סוג מוסך</string>
     <string name="garage_address">כתובת המוסך</string>
+    <string name="carhelper">CarHelper</string>
+    <string name="name_not_required">אם אתה כבר רשום שדה שם אינו חובה</string>
 
 </resources>

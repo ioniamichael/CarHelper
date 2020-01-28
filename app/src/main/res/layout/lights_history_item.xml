@@ -7,8 +7,8 @@
     android:layout_height="70dp"
     android:layoutDirection="rtl"
     android:translationZ="2dp"
-    android:layout_gravity="center"
     android:layout_margin="5dp"
+    android:layout_gravity="center"
     card_view:cardCornerRadius="100dp"
     card_view:cardElevation="3dp">
 

@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -21,9 +22,10 @@ import com.enjoyapp.carhelper.fragments.lights.SortFragment;
 import com.enjoyapp.carhelper.models.Greetings;
 import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.singletons.UserSingleton;
+import com.enjoyapp.carhelper.utils.CustomToast;
 import com.enjoyapp.carhelper.views.SignInView;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private Greetings mGreetings = new Greetings();
     private TextView mTVgreetings;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_left_to_right)
                 .replace(R.id.sort_fragment_container, new SortFragment())
                 .commit();
+
     }
 
     public void removeSortFragment() {
@@ -123,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     case MotionEvent.ACTION_UP:
                         if (!(mCurrentFragment instanceof LightsFragment)) {
                             showLightsFragment();
+                            mBTNsort.setAlpha(1);
+                            mBTNsort.setEnabled(true);
                         }
                         break;
                 }
@@ -137,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     case MotionEvent.ACTION_UP:
                         if (!(mCurrentFragment instanceof GarageFragment)) {
                             showGarageFragment();
+                            mBTNsort.animate().alpha(0);
+                            mBTNsort.setEnabled(false);
                         }
                         break;
                 }
@@ -176,8 +183,4 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         finish();
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

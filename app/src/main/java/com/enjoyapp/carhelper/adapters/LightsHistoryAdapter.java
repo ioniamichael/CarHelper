@@ -23,7 +23,6 @@ public class LightsHistoryAdapter extends RecyclerView.Adapter<LightsHistoryAdap
     private Context mContext;
     private ArrayList<String> keys;
     private final int mLimit = 3;
-    private LightsHistoryView lightsHistoryView;
 
 
     public LightsHistoryAdapter(LightsHistory lightsHistory, ArrayList<LightsHistory> lightsHistoryArrayList, Context mContext, ArrayList<String> keys) {

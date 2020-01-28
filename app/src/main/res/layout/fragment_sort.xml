@@ -1,41 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="60dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/sort_button_style"
     android:orientation="horizontal"
     android:paddingStart="110dp"
+    android:layout_centerInParent="true"
     tools:ignore="RtlSymmetry">
 
         <Button
-            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/firstButtonSort"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:background="@null"
+            android:textAlignment="textStart"
             android:textColor="@color/mainTextColor"
             tools:text="1" />
-
-        <Button
-            style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/secondButtonSort"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:textColor="@color/mainTextColor"
-            tools:text="2" />
-
-        <Button
-            style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/thirdButtonSort"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:textColor="@color/mainTextColor"
-            tools:text="3" />
 
 </LinearLayout>
