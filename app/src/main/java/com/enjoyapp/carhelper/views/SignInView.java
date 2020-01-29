@@ -1,13 +1,12 @@
 package com.enjoyapp.carhelper.views;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.presenters.EmailAndPasswordPresenter;
 import com.enjoyapp.carhelper.presenters.SignInPresenter;
-import com.enjoyapp.carhelper.R;
 import com.enjoyapp.carhelper.singletons.UserSingleton;
 import com.enjoyapp.carhelper.utils.CustomToast;
 import com.enjoyapp.carhelper.utils.EmailAndPasswordValidation;
@@ -56,7 +55,7 @@ public class SignInView {
             mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
-                        public void onSuccess(AuthResult authResult) {
+                        public void onSuccess(final AuthResult authResult) {
                             user.child(mAuth.getCurrentUser().getUid()).child("UserDetails")
                                     .setValue(UserSingleton.getInstance())
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -69,7 +68,7 @@ public class SignInView {
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    customToast.showToast(e.getMessage());
+                                    customToast.showToast(e.getMessage(), e);
                                     signInPresenter.stopGetStartedButton();
                                     signInPresenter.showFailedAnimation();
                                 }
@@ -78,7 +77,7 @@ public class SignInView {
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    customToast.showToast(e.getMessage());
+                    customToast.showToast(e.getMessage(), e);
                     signInPresenter.stopGetStartedButton();
                     signInPresenter.showFailedAnimation();
                 }
@@ -91,7 +90,7 @@ public class SignInView {
     public void signIn(String mEmail, String mPassword) {
         customToast = new CustomToast(context);
         validation = new EmailAndPasswordValidation();
-        if (mEmail.isEmpty()|| mPassword.isEmpty()) {
+        if (mEmail.isEmpty() || mPassword.isEmpty()) {
             emailAndPasswordPresenter.setUiForWrongInputs();
             return;
         }
@@ -107,7 +106,7 @@ public class SignInView {
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    customToast.showToast(e.getMessage());
+                    customToast.showToast(e.getMessage(), e);
                     signInPresenter.stopSignInButtonAnim();
                     signInPresenter.showFailedAnimation();
                 }

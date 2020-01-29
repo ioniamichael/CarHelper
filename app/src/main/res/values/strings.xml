@@ -31,5 +31,7 @@
     <string name="garage_address">כתובת המוסך</string>
     <string name="carhelper">CarHelper</string>
     <string name="name_not_required">אם אתה כבר רשום שדה שם אינו חובה</string>
+    <string name="history_search">היסטוריית חיפושים</string>
+    <string name="firebase_invalid_password">the password is invalid or the user does not have a password</string>
 
 </resources>

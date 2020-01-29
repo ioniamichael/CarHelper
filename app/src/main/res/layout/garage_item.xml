@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
+    android:animateLayoutChanges="true"
     android:layout_marginEnd="10dp"
     android:background="@drawable/light_info_frame_style"
     android:orientation="vertical"
@@ -18,6 +19,7 @@
 
     <LinearLayout
         android:id="@+id/topline"
+        android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

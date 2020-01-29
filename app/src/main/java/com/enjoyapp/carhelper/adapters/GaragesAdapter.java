@@ -1,7 +1,11 @@
 package com.enjoyapp.carhelper.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +62,7 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
         holder.mGaragePhoneNumber.setText(garageObjects.get(position).garagePhone);
         holder.mGarageType.setText(garageObjects.get(position).garageType);
         holder.mIVPhoneButton.setTag(position);
+        holder.mIVWazeButton.setTag(position);
 
         if (position == selected) {
             expandSelectedCard(holder);
@@ -88,6 +93,26 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
                 }
             }
         });
+
+        holder.mIVWazeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    // Launch Waze
+                    String mapRequest = "https://waze.com/ul?q=" + garageObjects.get(position).garageCity + "," + garageObjects.get(position).garageAddress + "&navigate=yes&zoom=17";
+                    Uri gmmIntentUri = Uri.parse(mapRequest);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.waze");
+                    context.startActivity(mapIntent);
+                    Log.d("myDebug", "onClick: " + garageObjects.get(position).garageAddress);
+
+                } catch (ActivityNotFoundException e) {
+                    // If Waze is not installed, open it in Google Play
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.waze"));
+                    context.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -111,7 +136,7 @@ public class GaragesAdapter extends RecyclerView.Adapter<GaragesAdapter.GarageVi
             setOnStartVisibility();
         }
 
-        public void initView(View itemView){
+        public void initView(View itemView) {
             mIVWazeButton = itemView.findViewById(R.id.IVWazeButton);
             mIVPhoneButton = itemView.findViewById(R.id.IVPhoneButton);
             mGarageName = itemView.findViewById(R.id.garageName);

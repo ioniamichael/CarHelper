@@ -2,11 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layoutDirection="rtl"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".screens.LoginActivity">
+
+    <include
+        layout="@layout/app_logo_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/sign_in_fields_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/requiredFieldsTXT"
@@ -53,35 +62,6 @@
             android:layout_height="50dp"
             android:layout_margin="15dp"
             android:layout_weight="1"
-            android:elevation="3dp"
-            android:translationZ="5dp"
-            app:cardCornerRadius="100dp">
-
-            <Button
-                android:id="@+id/getStartedBTN"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/login_button_style"
-                android:text="@string/get_started" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/LAVGetStarted"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:lottie_autoPlay="true"
-                app:lottie_fileName="continuous_wave_loader.json"
-                app:lottie_loop="true"
-                android:visibility="gone"
-                app:lottie_speed="1.25" />
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="15dp"
-            android:layout_weight="1"
             card_view:cardBackgroundColor="@android:color/transparent"
             card_view:cardElevation="0dp">
 
@@ -99,11 +79,40 @@
                 android:id="@+id/LAVLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="continuous_wave_loader.json"
                 app:lottie_loop="true"
+                app:lottie_speed="1.25" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:elevation="3dp"
+            android:translationZ="5dp"
+            app:cardCornerRadius="100dp">
+
+            <Button
+                android:id="@+id/getStartedBTN"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/login_button_style"
+                android:text="@string/get_started" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/LAVGetStarted"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:visibility="gone"
-                app:lottie_speed="1.25"/>
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="continuous_wave_loader.json"
+                app:lottie_loop="true"
+                app:lottie_speed="1.25" />
+
 
         </androidx.cardview.widget.CardView>
 

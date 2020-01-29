@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,7 @@ public class LightsFragment extends Fragment implements LightsPresenter, LightsH
     private LightsHistoryView lightsHistoryView;
     private LightsHistory lightsHistory;
     private ArrayList<LightsHistory> lightsHistoryArrayList = new ArrayList<>();
+    private FrameLayout mHistoryContainer;
 
     private String TAG = "LightsFragment";
     int i = 0;
@@ -147,6 +150,7 @@ public class LightsFragment extends Fragment implements LightsPresenter, LightsH
         lightsHistoryView = new LightsHistoryView(lightsHistoryArrayList, keys, lightsHistory, this);
         mRVLights = view.findViewById(R.id.RVLights);
         mRVHistory = view.findViewById(R.id.RVHistory);
+        mHistoryContainer = view.findViewById(R.id.historyContainer);
     }
 
     //Getting light's data
@@ -203,6 +207,5 @@ public class LightsFragment extends Fragment implements LightsPresenter, LightsH
             lightsHistoryAdapter.notifyDataSetChanged();
         }
     }
-
 
 }

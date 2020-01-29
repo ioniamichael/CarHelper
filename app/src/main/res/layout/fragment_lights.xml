@@ -9,9 +9,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVLights"
-        android:layout_above="@id/historyContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@id/historyContainer" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/lightsInfoRootViewContainer"
@@ -34,20 +34,28 @@
     <FrameLayout
         android:id="@+id/historyContainer"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingStart="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/top_border">
+        android:background="@drawable/top_border"
+        android:paddingStart="100dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/history_search"
+            android:textSize="12sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RVHistory"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:layout_gravity="bottom |center_horizontal"
+            android:orientation="horizontal">
 
         </androidx.recyclerview.widget.RecyclerView>
     </FrameLayout>
-
 
 
 </RelativeLayout>

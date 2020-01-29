@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_logo_cd"
+        android:drawableStart="@drawable/app_logo_icon_style"
+        android:text="@string/carhelper"
+        android:textStyle="bold"
+        android:tint="@color/mainTextColor" />
+
+</RelativeLayout>
