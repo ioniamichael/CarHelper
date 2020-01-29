@@ -51,6 +51,7 @@ public class GarageListView {
 
             for (int i = 0; i < 13273; i++) {
                 if (mGarage.getGarage().get(i).garageCity.equals(AddressSingleton.getInstance().getmCurrentAddress())) {
+
                     if (!mGarageObjects.contains(mGarage.getGarage().get(i))) {
                         mGarageObjects.add(mGarage.getGarage().get(i));
                     }
